@@ -1,21 +1,34 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import Loading from './components/Loading'
+import LoadErrorMessage from './components/LoadErrorMessage'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import muiTheme from './styles/theme'
+import Navigation from './components/Navigation'
+
+import './App.css'
 
 class App extends Component {
+  static childContextTypes = {
+    muiTheme: PropTypes.object.isRequired,
+  }
+
+  getChildContext() {
+    return { muiTheme }
+  }
+
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+      <MuiThemeProvider muiTheme={muiTheme}>
+        <div className="App">
+          <Loading />
+          <Navigation />
+          { this.props.children }
+          <LoadErrorMessage />
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
+      </MuiThemeProvider>
+    )
   }
 }
 
-export default App;
+export default App
