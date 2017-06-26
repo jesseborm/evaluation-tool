@@ -2,9 +2,10 @@
 import React, { PureComponent } from 'react'
 import Editor from 'react-medium-editor'
 import toMarkdown from 'to-markdown'
+import DatePicker from 'material-ui/DatePicker'
 import { connect } from 'react-redux'
 import { replace } from 'react-router-redux'
-import createRecipe from '../actions/recipes/create'
+import createRecipe from '../actions/batches/create'
 import { showError } from '../actions/loading'
 import 'medium-editor/dist/css/medium-editor.css'
 import 'medium-editor/dist/css/themes/default.css'
@@ -20,8 +21,13 @@ class RecipeEditor extends PureComponent {
   constructor(props) {
     super()
 
+    // const { batch, start, ends, students } = props
     const { title, summary, vegan, vegetarian, pescatarian, photo } = props
 
+    // this.state = {
+    //   batch, starts, ends, students, errors: {},
+    // }
+    
     this.state = {
       title,
       summary,
@@ -135,6 +141,10 @@ class RecipeEditor extends PureComponent {
           }}
           onChange={this.updateIntro.bind(this)}
           text={this.state.summary} />
+
+        <DatePicker
+          // onChange={this.updateDate.bind(this)}
+        />
 
         <input
           type="text"

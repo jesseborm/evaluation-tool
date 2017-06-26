@@ -1,4 +1,4 @@
-// src/actions/recipes/fetch.js
+// src/actions/batches/fetch.js
 
 import API from '../../api'
 import {
@@ -8,7 +8,7 @@ import {
   LOAD_SUCCESS
 } from '../loading'
 
-export const FETCHED_RECIPES = 'FETCHED_RECIPES'
+export const FETCHED_BATCHES = 'FETCHED_BATCHES'
 
 const api = new API()
 
@@ -16,7 +16,7 @@ export default () => {
   return (dispatch) => {
     dispatch({ type: APP_LOADING })
 
-    const backend = api.service('recipes')
+    const backend = api.service('batches')
 
     api.app.authenticate()
       .then(() => {
@@ -26,7 +26,7 @@ export default () => {
             dispatch({ type: LOAD_SUCCESS })
 
             dispatch({
-              type: FETCHED_RECIPES,
+              type: FETCHED_BATCHES,
               payload: result.data
             })
           })
@@ -45,7 +45,7 @@ export default () => {
             dispatch({ type: LOAD_SUCCESS })
 
             dispatch({
-              type: FETCHED_RECIPES,
+              type: FETCHED_BATCHES,
               payload: result.data
             })
           })

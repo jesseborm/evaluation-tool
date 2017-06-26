@@ -5,9 +5,9 @@ import { connect } from 'react-redux'
 import Title from '../components/Title'
 import RecipeItem from './RecipeItem'
 import './RecipesContainer.css'
-import fetchRecipes from '../actions/recipes/fetch'
-import subscribeToRecipesService from '../actions/recipes/subscribe'
-import CreateRecipeButton from './CreateRecipeButton'
+import fetchRecipes from '../actions/batches/fetch'
+import subscribeToRecipesService from '../actions/batches/subscribe'
+import CreateBatchButton from './CreateBatchButton'
 
 export class RecipesContainer extends PureComponent {
   static propTypes = {
@@ -28,8 +28,8 @@ export class RecipesContainer extends PureComponent {
     return(
       <div className="recipes wrapper">
         <header>
-          <Title content="All Recipes" />
-          <CreateRecipeButton />
+          <Title content="All Batches" />
+          <CreateBatchButton />
         </header>
 
         <main>

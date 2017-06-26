@@ -8,9 +8,9 @@ import registerServiceWorker from './registerServiceWorker'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 
 import App from './App'
-import RecipesContainer from './recipes/RecipesContainer'
-import RecipePage from './recipes/RecipePage'
-import RecipeEditor from './recipes/RecipeEditor'
+import RecipesContainer from './components/RecipesContainer'
+// import RecipePage from './recipes/RecipePage'
+import RecipeEditor from './components/RecipeEditor'
 import SignUp from './users/SignUp'
 import SignIn from './users/SignIn'
 
@@ -24,9 +24,9 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
       <Route path="/" component={App}>
-        {/* <IndexRoute component={Container} />
-          <Route path="/batches/:batchId" component={RecipePage} />
-        <Route path="/create-recipe" component={RecipeEditor} /> */}
+        <IndexRoute component={RecipesContainer} />
+        {/* <Route path="/batches/:batchId" component={RecipePage} /> */}
+        <Route path="/create-batch" component={RecipeEditor} />
         <Route path="/sign-in" component={SignIn} />
         <Route path="/sign-up" component={SignUp} />
       </Route>

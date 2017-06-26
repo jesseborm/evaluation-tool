@@ -4,9 +4,9 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import RaisedButton from 'material-ui/RaisedButton'
 import StarIcon from 'material-ui/svg-icons/action/favorite'
-import './CreateRecipeButton.css'
+import './CreateBatchButton.css'
 
-class CreateRecipeButton extends PureComponent {
+class CreateBatchButton extends PureComponent {
   static propTypes = {
     signedIn: PropTypes.bool,
   }
@@ -15,10 +15,10 @@ class CreateRecipeButton extends PureComponent {
     if (!this.props.signedIn) return null
 
     return (
-      <div className="CreateRecipeButton">
-        <Link to="/create-recipe">
+      <div className="CreateBatchButton">
+        <Link to="/create-batch">
           <RaisedButton
-            label="Create Recipe"
+            label="Create New Batch"
             primary={true}
             icon={<StarIcon />} />
         </Link>
@@ -31,4 +31,4 @@ const mapStateToProps = ({ currentUser }) => ({
   signedIn: !!currentUser && !!currentUser._id,
 })
 
-export default connect(mapStateToProps)(CreateRecipeButton)
+export default connect(mapStateToProps)(CreateBatchButton)
