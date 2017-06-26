@@ -21,13 +21,13 @@ class RecipeEditor extends PureComponent {
   constructor(props) {
     super()
 
-    // const { batch, start, ends, students } = props
+    // const { batch, start, ends } = props
     const { title, summary, vegan, vegetarian, pescatarian, photo } = props
 
     // this.state = {
-    //   batch, starts, ends, students, errors: {},
+    //   batch, starts, ends, errors: {},
     // }
-    
+
     this.state = {
       title,
       summary,
