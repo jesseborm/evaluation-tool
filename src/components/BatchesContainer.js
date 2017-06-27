@@ -11,7 +11,7 @@ import CreateBatchButton from './CreateBatchButton'
 
 export class BatchesContainer extends PureComponent {
   static propTypes = {
-    batch: PropTypes.array.isRequired,
+    batches: PropTypes.array.isRequired,
     fetchBatches: PropTypes.func.isRequired,
   }
 
