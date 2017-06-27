@@ -7,9 +7,6 @@ import './BatchItem.css'
 import fetchBatches from '../actions/batches/fetch'
 import Title from '../components/Title'
 
-const PLACEHOLDER = 'http://via.placeholder.com/500x180?text=No%20Image'
-
-
 export class showBatch extends PureComponent {
   static propTypes = {
     _id: PropTypes.string,
@@ -24,23 +21,22 @@ export class showBatch extends PureComponent {
     this.props.fetchBatches()
   }
 
-  
 
   renderStudents(student, index) {
-    console.log(student);
-    // debugger
     return (
-      // <div key={index} { ...student } />
       <div key={index} className="studentnumber">
-
-        <Link to={`/batches/${this.props._id}/students/${student._id}`}>
-          <h3>{student.fullName}</h3>
-        </Link>
+        <h3>{student.fullName}</h3>
         <img src={student.picture} />
-        {/* <div
-          className="cover"
-        style={{ backgroundImage: `url(${student.picture || PLACEHOLDER })` }} /> */}
-        <p>Recent color: {student.evaluation[0].color}</p>
+      </div>
+    )
+  }
+
+  renderEvaluation(evaluation, index) {
+    return (
+      <div key={index} className="studentevaluation">
+        {evaluations[0].}
+        <h3>{evaluations[0].color}</h3>
+
       </div>
     )
   }
@@ -52,6 +48,7 @@ export class showBatch extends PureComponent {
       starts,
       ends,
       students,
+      evaluations,
     } = this.props
 
 
@@ -60,12 +57,14 @@ export class showBatch extends PureComponent {
     return(
       <article className="Batch page">
         <header>
-          {/* <div
-            className="cover"
-          style={{ backgroundImage: `url(${batches.student.picture})` }} /> */}
-          <Title content={`Batch number: ${batchNumber} `} />
+          <Title content={`Student: ${student.fullName} `} />
         </header>
-        <div>{students.map(this.renderStudents.bind(this))}</div>
+        <div>
+          {students.map(
+            this
+            .renderStudents
+            .bind(this))}
+        </div>
       </article>
     )
   }
@@ -74,6 +73,13 @@ export class showBatch extends PureComponent {
 const mapStateToProps = ({ batches }, { params }) => {
   const batch = batches.reduce((prev, next) => {
     if (next._id === params.batchId) {
+      return next
+    }
+    return prev
+  }, {}),
+
+  const student = batch.students.reduce((prev, next) => {
+    if (next._id === params.studentId) {
       return next
     }
     return prev
