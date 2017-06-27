@@ -6,9 +6,12 @@ import ReactMarkdown from 'react-markdown'
 import './BatchItem.css'
 import fetchBatches from '../actions/batches/fetch'
 import Title from '../components/Title'
+// import QuestionButton from './QuestionButton'
+import RaisedButton from 'material-ui/RaisedButton'
+
+
 
 const PLACEHOLDER = 'http://via.placeholder.com/500x180?text=No%20Image'
-
 
 export class showBatch extends PureComponent {
   static propTypes = {
@@ -24,25 +27,71 @@ export class showBatch extends PureComponent {
     this.props.fetchBatches()
   }
 
+<<<<<<< HEAD
   
 
+=======
+>>>>>>> algorithm-button
   renderStudents(student, index) {
     console.log(student);
     // debugger
     return (
       // <div key={index} { ...student } />
       <div key={index} className="studentnumber">
-
         <Link to={`/batches/${this.props._id}/students/${student._id}`}>
           <h3>{student.fullName}</h3>
         </Link>
         <img src={student.picture} />
         {/* <div
+
           className="cover"
         style={{ backgroundImage: `url(${student.picture || PLACEHOLDER })` }} /> */}
         <p>Recent color: {student.evaluation[0].color}</p>
       </div>
     )
+  }
+  //////////////////////////////////////////////
+  selectColor() {
+    // debugger
+    let chance = Math.random()
+
+    if (chance <= .017) {
+      return "green"
+    } else if (chance > .5) {
+      return "red"
+    } else {
+      return "yellow"
+    }
+  }
+
+  receiveStudentArray() {
+
+  }
+
+  askQuestionTo(students) {
+    console.log(this.selectColor());
+    // debugger
+    // filter over students then random
+    // console.log("students: " + students);
+    const fullNames = students.map((s) => s.fullName)
+
+    const luckyOnes =
+    students.filter((studentObj) => {
+      if (studentObj.evaluation[0].color == this.selectColor()) //can only test this when I have seeds for all colors
+        return studentObj.fullName
+    })
+    debugger
+
+    // debugger
+    const luckyOne = luckyOnes[Math.floor(Math.random() * students.length)]
+
+    // write in one select
+    // students.evaluation[0].color  selectColor()
+    //
+    // students.evaluation[0][Math.floor(Math.random() * students.length)]
+    //
+    console.log(luckyOne);
+    window.alert(luckyOne)
   }
 
   render() {
@@ -66,7 +115,14 @@ export class showBatch extends PureComponent {
           <Title content={`Batch number: ${batchNumber} `} />
         </header>
         <div>{students.map(this.renderStudents.bind(this))}</div>
+        <main>
+          <RaisedButton
+            label="Who is the lucky one?"
+            onClick={ this.askQuestionTo(students).bind(this) }
+          />
+        </main>
       </article>
+
     )
   }
 }
