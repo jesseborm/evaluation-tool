@@ -42,6 +42,7 @@ export class BatchItem extends PureComponent {
           </h1>
           <p>Starts on: {starts}</p>
           <p>Ends on: {ends}</p>
+          <p>Amount of students: {students.length}</p>
 
           {/* {students.fullName}
           {students.evaluation.color} */}
@@ -61,7 +62,5 @@ export class BatchItem extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ currentUser }) => ({currentUser})
-export default connect(mapStateToProps
-  // , { toggleLike }
-)(BatchItem)
+const mapStateToProps = ({ batches, currentUser }) => ({batches, currentUser})
+export default connect(mapStateToProps)(BatchItem)

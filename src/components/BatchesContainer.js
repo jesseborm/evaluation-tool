@@ -26,7 +26,7 @@ export class BatchesContainer extends PureComponent {
   }
 
   render() {
-    if (this.props.signedIn) {
+    if (!this.props.signedIn) return null
       return(
         <div className="batches wrapper">
           <header>
@@ -39,8 +39,6 @@ export class BatchesContainer extends PureComponent {
           </main>
         </div>
       )
-    }
-    return null
   }
 }
 
