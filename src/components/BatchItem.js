@@ -18,10 +18,6 @@ export class BatchItem extends PureComponent {
     students: PropTypes.Array
   }
 
-  renderStudents() {
-    // students.map()
-  }
-
   render() {
     const {
       _id,

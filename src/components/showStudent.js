@@ -7,9 +7,6 @@ import './BatchItem.css'
 import fetchBatches from '../actions/batches/fetch'
 import Title from '../components/Title'
 
-const PLACEHOLDER = 'http://via.placeholder.com/500x180?text=No%20Image'
-
-
 export class showBatch extends PureComponent {
   static propTypes = {
     _id: PropTypes.string,
@@ -26,20 +23,22 @@ export class showBatch extends PureComponent {
 
 
   renderStudents(student, index) {
-    console.log(student);
-    // debugger
     return (
-      // <div key={index} { ...student } />
       <div key={index} className="studentnumber">
-
         <Link to={`/batches/${this.props._id}/students/${student._id}`}>
           <h3>{student.fullName}</h3>
         </Link>
         <img src={student.picture} />
-        {/* <div
-          className="cover"
-        style={{ backgroundImage: `url(${student.picture || PLACEHOLDER })` }} /> */}
-        <p>Recent color: {student.evaluation[0].color}</p>
+      </div>
+    )
+  }
+  renderEvaluation(evaluation, index) {
+    return (
+      <div key={index} className="studentevaluation">
+        {/* <Link to={`/batches/${this.props._id}/students/${student._id}`}> */}
+        <h3>{evaluation[0].color}</h3>
+        {/* </Link> */}
+        <img src={student.picture} />
       </div>
     )
   }
@@ -51,6 +50,7 @@ export class showBatch extends PureComponent {
       starts,
       ends,
       students,
+      evaluations,
     } = this.props
 
 
@@ -59,9 +59,6 @@ export class showBatch extends PureComponent {
     return(
       <article className="Batch page">
         <header>
-          {/* <div
-            className="cover"
-          style={{ backgroundImage: `url(${batches.student.picture})` }} /> */}
           <Title content={`Batch number: ${batchNumber} `} />
         </header>
         <div>{students.map(this.renderStudents.bind(this))}</div>
