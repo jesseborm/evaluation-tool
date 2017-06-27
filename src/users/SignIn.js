@@ -41,9 +41,9 @@ export class SignIn extends PureComponent {
     this.props.signIn(user)
   }
 
-  signUp() {
-    this.props.push('/sign-up')
-  }
+  // signUp() {
+  //   this.props.push('/sign-up')
+  // }
 
   render() {
     return (
@@ -57,9 +57,9 @@ export class SignIn extends PureComponent {
           <div className="input">
             <TextField ref="password" type="password" hintText="Password"  />
           </div>
-          <FlatButton
+          {/* <FlatButton
             onClick={ this.signUp.bind(this) }
-            label="Sign up" />
+          label="Sign up" /> */}
           <RaisedButton
             style={ buttonStyle }
             onClick={ this.submitForm.bind(this) }

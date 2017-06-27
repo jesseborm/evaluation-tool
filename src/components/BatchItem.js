@@ -28,8 +28,9 @@ export class BatchItem extends PureComponent {
       batchNumber,
       starts,
       ends,
-
+      students,
     } = this.props
+
     return(
       <article className="batch">
         <header>
@@ -39,13 +40,12 @@ export class BatchItem extends PureComponent {
           <h1>
             <Link to={`/batches/${_id}`}>Batch: { batchNumber }</Link>
           </h1>
-          <p>
-            Starts on: {starts}
-            Ends on: {ends}
+          <p>Starts on: {starts}</p>
+          <p>Ends on: {ends}</p>
 
-            {/* {students.fullName}
-            {students.evaluation.color} */}
-          </p>
+          {/* {students.fullName}
+          {students.evaluation.color} */}
+
         </header>
         <main>
           {/* <ReactMarkdown source={} /> */}

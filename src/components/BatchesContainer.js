@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Title from '../components/Title'
 import BatchItem from './BatchItem'
+
 import './BatchesContainer.css'
 import fetchBatches from '../actions/batches/fetch'
 import subscribeToBatchesService from '../actions/batches/subscribe'
@@ -25,22 +26,28 @@ export class BatchesContainer extends PureComponent {
   }
 
   render() {
-    return(
-      <div className="batches wrapper">
-        <header>
-          <Title content="All Batches" />
-          <CreateBatchButton />
-        </header>
+    if (this.props.signedIn) {
+      return(
+        <div className="batches wrapper">
+          <header>
+            <Title content="All Batches" />
+            <CreateBatchButton />
+          </header>
 
-        <main>
-          { this.props.batches.map(this.renderBatch.bind(this)) }
-        </main>
-      </div>
-    )
+          <main>
+            { this.props.batches.map(this.renderBatch.bind(this)) }
+          </main>
+        </div>
+      )
+    }
+    return null
   }
 }
 
-const mapStateToProps = ({ batches }) => ({ batches })
+const mapStateToProps = ({ batches, currentUser }) => ({
+  batches,
+  signedIn: !!currentUser && !!currentUser._id,
+})
 
 export default connect(mapStateToProps, {
   fetchBatches, subscribeToBatchesService
