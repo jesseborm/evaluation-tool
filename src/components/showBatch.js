@@ -24,6 +24,7 @@ export class showBatch extends PureComponent {
     this.props.fetchBatches()
   }
 
+  
 
   renderStudents(student, index) {
     console.log(student);

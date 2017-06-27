@@ -25,20 +25,18 @@ export class showBatch extends PureComponent {
   renderStudents(student, index) {
     return (
       <div key={index} className="studentnumber">
-        <Link to={`/batches/${this.props._id}/students/${student._id}`}>
-          <h3>{student.fullName}</h3>
-        </Link>
+        <h3>{student.fullName}</h3>
         <img src={student.picture} />
       </div>
     )
   }
+
   renderEvaluation(evaluation, index) {
     return (
       <div key={index} className="studentevaluation">
-        {/* <Link to={`/batches/${this.props._id}/students/${student._id}`}> */}
-        <h3>{evaluation[0].color}</h3>
-        {/* </Link> */}
-        <img src={student.picture} />
+        {evaluations[0].}
+        <h3>{evaluations[0].color}</h3>
+
       </div>
     )
   }
@@ -59,9 +57,14 @@ export class showBatch extends PureComponent {
     return(
       <article className="Batch page">
         <header>
-          <Title content={`Batch number: ${batchNumber} `} />
+          <Title content={`Student: ${student.fullName} `} />
         </header>
-        <div>{students.map(this.renderStudents.bind(this))}</div>
+        <div>
+          {students.map(
+            this
+            .renderStudents
+            .bind(this))}
+        </div>
       </article>
     )
   }
@@ -70,6 +73,13 @@ export class showBatch extends PureComponent {
 const mapStateToProps = ({ batches }, { params }) => {
   const batch = batches.reduce((prev, next) => {
     if (next._id === params.batchId) {
+      return next
+    }
+    return prev
+  }, {}),
+
+  const student = batch.students.reduce((prev, next) => {
+    if (next._id === params.studentId) {
       return next
     }
     return prev
