@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import ReactMarkdown from 'react-markdown'
 import './BatchItem.css'
 import { Link } from 'react-router'
-// import CookingTime from './CookingTime'
 
 const PLACEHOLDER = 'http://via.placeholder.com/500x180?text=No%20Image'
 
@@ -45,6 +44,7 @@ export class BatchItem extends PureComponent {
 
         </header>
         <main>
+
           {/* <ReactMarkdown source={} /> */}
         </main>
         {/* <footer>
