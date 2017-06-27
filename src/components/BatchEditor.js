@@ -1,15 +1,15 @@
-// src/recipes/RecipeEditor.js
+// src/components/BatchEditor.js
 import React, { PureComponent } from 'react'
 import Editor from 'react-medium-editor'
 import toMarkdown from 'to-markdown'
 import DatePicker from 'material-ui/DatePicker'
 import { connect } from 'react-redux'
 import { replace } from 'react-router-redux'
-import createRecipe from '../actions/batches/create'
+import createBatch from '../actions/batches/create'
 import { showError } from '../actions/loading'
 import 'medium-editor/dist/css/medium-editor.css'
 import 'medium-editor/dist/css/themes/default.css'
-import './RecipeEditor.css'
+import './BatchEditor.css'
 
 const TYPES = [
   'vegan',
@@ -17,7 +17,7 @@ const TYPES = [
   'pescatarian'
 ]
 
-class RecipeEditor extends PureComponent {
+class BatchEditor extends PureComponent {
   constructor(props) {
     super()
 
@@ -42,7 +42,7 @@ class RecipeEditor extends PureComponent {
   componentWillReceiveProps(newProps) {
     const { replace, signedIn, showError } = newProps
     if (!signedIn) {
-      showError('You need to be signed up to create recipes!')
+      showError('You need to be signed up to create batches!')
       replace('/sign-up')
     }
   }
@@ -78,8 +78,8 @@ class RecipeEditor extends PureComponent {
     })
   }
 
-  validate(recipe) {
-    const { title, photo } = recipe
+  validate(batch) {
+    const { title, photo } = batch
 
     let errors = {}
 
@@ -93,7 +93,7 @@ class RecipeEditor extends PureComponent {
     return Object.keys(errors).length === 0
   }
 
-  saveRecipe() {
+  saveBatch() {
     const {
       title,
       summary,
@@ -103,7 +103,7 @@ class RecipeEditor extends PureComponent {
       photo,
     } = this.state
 
-    const recipe = {
+    const batch = {
       title,
       summary: toMarkdown(summary || ''),
       vegetarian,
@@ -113,8 +113,8 @@ class RecipeEditor extends PureComponent {
       photo,
     }
 
-    if (this.validate(recipe)) {
-      this.props.createRecipe(recipe)
+    if (this.validate(batch)) {
+      this.props.createBatch(batch)
     }
   }
 
@@ -165,7 +165,7 @@ class RecipeEditor extends PureComponent {
         })}
 
         <div className="actions">
-          <button className="primary" onClick={this.saveRecipe.bind(this)}>Save</button>
+          <button className="primary" onClick={this.saveBatch.bind(this)}>Save</button>
         </div>
       </div>
     )
@@ -175,4 +175,4 @@ class RecipeEditor extends PureComponent {
 const mapStateToProps = ({ currentUser }) => ({
   signedIn: !!currentUser && !!currentUser._id,
 })
-export default connect(mapStateToProps, { createRecipe, replace, showError })(RecipeEditor)
+export default connect(mapStateToProps, { createBatch, replace, showError })(BatchEditor)
