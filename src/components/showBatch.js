@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import ReactMarkdown from 'react-markdown'
-import './BatchItem.css'
+import './ShowBatch.css'
 import fetchBatches from '../actions/batches/fetch'
 import Title from '../components/Title'
 // import QuestionButton from './QuestionButton'
@@ -27,9 +27,7 @@ export class showBatch extends PureComponent {
     this.props.fetchBatches()
   }
 
-  renderStudentColor() {
-
-  }
+  renderStudentColor() {}
 
   renderStudents(student, index) {
     console.log(student);
@@ -51,7 +49,7 @@ export class showBatch extends PureComponent {
           vs. student.evaluation.slice(-1)
           -> arr[(arr.slice(-2, -1))[0]]
         */}
-        <p>First color in array: {student.evaluation[0].color}</p>
+        {/* <p>First color in array: {student.evaluation[0].color}</p> */}
       </div>
     )
   }
@@ -74,29 +72,28 @@ export class showBatch extends PureComponent {
   }
 
   askQuestionTo(students) {
-    console.log(this.selectColor());
-    // debugger
-    // filter over students then random
-    // console.log("students: " + students);
-    const fullNames = students.map((s) => s.fullName)
-    let color = this.selectColor()
-    const luckyOnes =
-    students.filter((stud) => {
-      if (stud.evaluation[stud.length - 1].color === color) //can only test this when I have seeds for all colors
-        return stud
-        debugger
-    })
-
-    // debugger
-    const luckyOne = luckyOnes[Math.floor(Math.random() * luckyOnes.length)]
-
-    // write in one select
-    // students.evaluation[0].color  selectColor()
-    //
-    // students.evaluation[0][Math.floor(Math.random() * students.length)]
-    //
-    console.log(luckyOne);
-    window.alert(luckyOne)
+  //   console.log(this.selectColor());
+  //   // filter over students then random
+  //   // console.log("students: " + students);
+  //   const fullNames = students.map((s) => s.fullName)
+  //   // let color = this.selectColor()
+  //   const luckyOnes =
+  //   students.filter((stud) => {
+  //     if (stud.evaluation[stud.length - 1].color === this.selectColor()) //can only test this when I have seeds for all colors
+  //       return stud
+  //       debugger
+  //   })
+  //
+  //   // debugger
+  //   const luckyOne = luckyOnes[Math.floor(Math.random() * luckyOnes.length)]
+  //
+  //   // write in one select
+  //   // students.evaluation[0].color  selectColor()
+  //   //
+  //   // students.evaluation[0][Math.floor(Math.random() * students.length)]
+  //   //
+  //   console.log(luckyOne);
+  //   window.alert(luckyOne)
   }
 
   render() {
@@ -112,19 +109,19 @@ export class showBatch extends PureComponent {
     if (!_id) return null
 
     return(
-      <article className="batch-page">
+      <article className="batch-student">
         <header>
           {/* <div
             className="cover"
           style={{ backgroundImage: `url(${batches.student.picture})` }} /> */}
           <Title content={`Batch number: ${batchNumber} `} />
         </header>
-        <div>{students.map(this.renderStudents.bind(this))}</div>
+        <RaisedButton
+          label="Who is the lucky one?"
+          // onClick={ this.askQuestionTo(students).bind(this) }
+        />
+        <div className="cover">{students.map(this.renderStudents.bind(this))}</div>
         <main>
-          <RaisedButton
-            label="Who is the lucky one?"
-            onClick={ this.askQuestionTo(students).bind(this) }
-          />
         </main>
       </article>
 
