@@ -1,50 +1,50 @@
-// src/recipes/RecipesContainer.test.js
+// src/components/BatchesContainer.test.js
 import React from 'react'
 import chai, { expect } from 'chai'
 import spies from 'chai-spies'
 import { shallow } from 'enzyme'
 import chaiEnzyme from 'chai-enzyme'
-import { RecipesContainer } from './RecipesContainer'
-import Title from '../components/Title'
-import RecipeItem from './RecipeItem'
-import recipes from '../seeds/recipes'
+import { BatchesContainer } from './BatchesContainer'
+import Title from './Title'
+import BatchItem from './BatchItem'
+import batches from '../seeds/batches'
 
 chai.use(chaiEnzyme())
 chai.use(spies)
 
-describe('<RecipesContainer />', () => {
-  const fetchRecipes = chai.spy()
+describe('<BatchContainer />', () => {
+  const fetchBatches = chai.spy()
   const container = shallow(
-    <RecipesContainer
-      recipes={recipes}
-      fetchRecipes={fetchRecipes} />
+    <BatchesContainer
+      batches={batches}
+      fetchBatches={fetchBatches} />
   )
 
-  it('is wrapped in a div with class name "recipes"', () => {
+  it('is wrapped in a div with class name "batches"', () => {
     expect(container).to.have.className('wrapper')
-    expect(container).to.have.className('recipes')
+    expect(container).to.have.className('batches')
   })
 
   it('contains a Title', () => {
     expect(container).to.have.descendants(Title)
   })
 
-  it('sets the Title to "All Recipes"', () => {
-    expect(container).to.contain(<Title content="All Recipes" />)
+  it('sets the Title to "All Batches"', () => {
+    expect(container).to.contain(<Title content="All Batches" />)
   })
 
-  it('renders all recipes as a RecipeItem', () => {
-    expect(container).to.have.exactly(recipes.length).descendants(RecipeItem)
+  it('renders all batches as a BatchItem', () => {
+    expect(container).to.have.exactly(batches.length).descendants(BatchItem)
   })
 
-  it('calls fetchRecipes in componentWillMount', () => {
-    fetchRecipes.reset()
+  it('calls fetchBatches in componentWillMount', () => {
+    fetchBatches.reset()
 
     shallow(
-      <RecipesContainer
-        recipes={recipes}
-        fetchRecipes={fetchRecipes} />)
+      <BatchesContainer
+        batches={batches}
+        fetchBatches={fetchBatches} />)
 
-    expect(fetchRecipes).to.have.been.called.exactly.once()
+    expect(fetchBatches).to.have.been.called.exactly.once()
   })
 })

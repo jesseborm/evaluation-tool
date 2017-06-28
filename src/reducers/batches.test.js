@@ -1,9 +1,9 @@
-// src/reducers/recipes.test.js
+// src/reducers/batches.test.js
 
 import { expect } from 'chai'
-import reducer from './recipes'
+import reducer from './batches'
 
-describe('recipes reducer', () => {
+describe('bactches reducer', () => {
   const initialState = []
 
   it('returns an empty array for the initial state', () => {

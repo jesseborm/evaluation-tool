@@ -11,30 +11,22 @@ import 'medium-editor/dist/css/medium-editor.css'
 import 'medium-editor/dist/css/themes/default.css'
 import './BatchEditor.css'
 
-const TYPES = [
-  'vegan',
-  'vegetarian',
-  'pescatarian'
-]
 
 class BatchEditor extends PureComponent {
   constructor(props) {
     super()
 
     // const { batch, start, ends } = props
-    const { title, summary, vegan, vegetarian, pescatarian, photo } = props
-
-    // this.state = {
-    //   batch, starts, ends, errors: {},
-    // }
+    const { batchNumber, starts, ends } = props
 
     this.state = {
-      title,
-      summary,
-      vegan,
-      vegetarian,
-      pescatarian,
-      photo,
+      batchNumber, starts, ends, errors: {},
+    }
+
+    this.state = {
+      batchNumber,
+      starts,
+      ends,
       errors: {},
     }
   }
@@ -47,44 +39,39 @@ class BatchEditor extends PureComponent {
     }
   }
 
-  updateTitle(event) {
-    if (event.keyCode === 13) {
-      event.preventDefault()
-      this.refs.summary.medium.elements[0].focus()
-    }
+  updateBatchNumber(event) {
     this.setState({
-      title: this.refs.title.value
-    })
-  }
-
-  updatePhoto(event) {
-    this.setState({
-      photo: this.refs.photo.value
-    })
-  }
-
-  updateIntro(text, medium) {
-    this.setState({
-      summary: text
+      batchNumber: this.refs.batchNumber.value
     })
   }
 
 
-  setType(event) {
+  updateStartDate(event, date) {
     this.setState({
-      vegan: event.target.value === 'vegan',
-      vegetarian: event.target.value === 'vegetarian',
-      pescatarian: event.target.value === 'pescatarian'
+      starts: this.date
     })
+    console.log("start date:::" + date);
   }
+
+  updateEndDate(event, date) {
+    this.setState({
+      ends: this.date
+    })
+    console.log("end date:::" + date);
+  }
+
+
 
   validate(batch) {
-    const { title, photo } = batch
+    const { batchNumber, starts, ends } = batch
 
     let errors = {}
+    if (!batchNumber || batchNumber === '') errors.batchNumber = 'Please enter batchNumber'
 
-    if (!title || title === '') errors.title = 'We need a title..!'
-    if (!photo || photo === '') errors.photo = 'We need a photo, cmon!'
+    // #FIXME // When selecting a date, throws date errors when clicking save.
+    // if (!starts || starts === '') errors.starts = 'Please enter start date'
+    // if (!ends || ends === '') errors.ends = 'Please enter end date'
+    // if (starts >= ends) errors.dates = 'End date must come after start date'
 
     this.setState({
       errors,
@@ -95,22 +82,15 @@ class BatchEditor extends PureComponent {
 
   saveBatch() {
     const {
-      title,
-      summary,
-      vegetarian,
-      vegan,
-      pescatarian,
-      photo,
+      batchNumber,
+      starts,
+      ends,
     } = this.state
 
     const batch = {
-      title,
-      summary: toMarkdown(summary || ''),
-      vegetarian,
-      vegan,
-      pescatarian,
-      liked: false,
-      photo,
+      batchNumber,
+      starts,
+      ends,
     }
 
     if (this.validate(batch)) {
@@ -125,44 +105,29 @@ class BatchEditor extends PureComponent {
       <div className="editor">
         <input
           type="text"
-          ref="title"
-          className="title"
-          placeholder="Title"
-          defaultValue={this.state.title}
-          onChange={this.updateTitle.bind(this)}
-          onKeyDown={this.updateTitle.bind(this)} />
+          ref="batchNumber"
+          className="batchNumber"
+          placeholder="batch number"
+          defaultValue={this.state.batchNumber}
+          onChange={this.updateBatchNumber.bind(this)}
+          onKeyDown={this.updateBatchNumber.bind(this)} />
 
-        { errors.title && <p className="error">{ errors.title }</p> }
-
-        <Editor
-          ref="summary"
-          options={{
-            placeholder: {text: 'Write an Introduction...'}
-          }}
-          onChange={this.updateIntro.bind(this)}
-          text={this.state.summary} />
+        { errors.batchNumber && <p className="error">{ errors.batchNumber }</p> }
 
         <DatePicker
-          // onChange={this.updateDate.bind(this)}
+          hintText="Click to select start date"
+          onChange={this.updateStartDate.bind(this)}
         />
 
-        <input
-          type="text"
-          ref="photo"
-          className="photo"
-          placeholder="Photo URL"
-          defaultValue={this.state.photo}
-          onChange={this.updatePhoto.bind(this)}
-          onKeyDown={this.updatePhoto.bind(this)} />
+        {/* { errors.starts && <p className="error">{ errors.starts }</p> } */}
 
-        { errors.photo && <p className="error">{ errors.photo }</p> }
+        <DatePicker
+          hintText="Click to select end date"
+          onChange={this.updateEndDate.bind(this)}
+        />
 
-        {TYPES.map((type) => {
-          return <label key={type} htmlFor={type}>
-            <input id={type} type="radio" name="type" value={type} onChange={this.setType.bind(this)} />
-            {type}
-          </label>
-        })}
+        {/* { errors.ends && <p className="error">{ errors.ends }</p> } */}
+        {/* { errors.dates && <p className="error">{ errors.dates }</p> } */}
 
         <div className="actions">
           <button className="primary" onClick={this.saveBatch.bind(this)}>Save</button>
