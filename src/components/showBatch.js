@@ -27,11 +27,6 @@ export class showBatch extends PureComponent {
     this.props.fetchBatches()
   }
 
-<<<<<<< HEAD
-  
-
-=======
->>>>>>> algorithm-button
   renderStudents(student, index) {
     console.log(student);
     // debugger
@@ -55,7 +50,7 @@ export class showBatch extends PureComponent {
     // debugger
     let chance = Math.random()
 
-    if (chance <= .017) {
+    if (chance <= .17) {
       return "green"
     } else if (chance > .5) {
       return "red"
@@ -74,16 +69,16 @@ export class showBatch extends PureComponent {
     // filter over students then random
     // console.log("students: " + students);
     const fullNames = students.map((s) => s.fullName)
-
+    let color = this.selectColor()
     const luckyOnes =
-    students.filter((studentObj) => {
-      if (studentObj.evaluation[0].color == this.selectColor()) //can only test this when I have seeds for all colors
-        return studentObj.fullName
+    students.filter((stud) => {
+      if (stud.evaluation[0].color === color) //can only test this when I have seeds for all colors
+        return stud
+        debugger
     })
-    debugger
 
     // debugger
-    const luckyOne = luckyOnes[Math.floor(Math.random() * students.length)]
+    const luckyOne = luckyOnes[Math.floor(Math.random() * luckyOnes.length)]
 
     // write in one select
     // students.evaluation[0].color  selectColor()
