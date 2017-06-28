@@ -1,15 +1,14 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { Link } from 'react-router'
 import RaisedButton from 'material-ui/RaisedButton'
 import StarIcon from 'material-ui/svg-icons/action/favorite'
+import Dialog from 'material-ui/Dialog'
 import './QuestionButton.css'
 
 class QuestionButton extends PureComponent {
-  static propTypes = {
-    signedIn: PropTypes.bool,
-  }
+  // static propTypes = {
+  //   students: PropTypes.array.isRequired
+  // }
 
   selectColor() {
     let chance = Math.random()
@@ -22,19 +21,41 @@ class QuestionButton extends PureComponent {
       return "yellow"
     }
   }
+  selectColor() {
+    // debugger
+    let chance = Math.random()
 
-  askQuestionTo() {
-    console.log(selectColor());
-    // filter over students then random
-    const luckyOne = students.filter(() => (students.evaluation[0].color === selectColor()))[Math.floor(Math.random() * students.length)]
+    if (chance <= .17) {
+      return "green"
+    } else if (chance > .5) {
+      return "red"
+    } else {
+      return "yellow"
+    }
+  }
 
-    // write in one select
-    // students.evaluation[0].color  selectColor()
-    //
-    // students.evaluation[0][Math.floor(Math.random() * students.length)]
-    //
 
-    window.alert('One')
+  // checkColorValid() {
+  //   // check if there is a student with the selected color who hasn't been asked yet today
+  //   let color = this.selectColor()
+  //   if (color)
+  // }
+
+  askQuestionTo(students) {
+    const luckyOnes = students.filter((stud) => {
+      if (this.lastEvaluation(stud).color === this.selectColor()) {
+        return stud
+      }
+    })
+    // if (luckyOnes == '')
+    // if (luckyOnes === [])
+      // askQuestionTo(students)
+
+    const luckyOne = (luckyOnes[Math.floor(Math.random() * luckyOnes.length)]).fullName
+    // const theName = luckyOne.fullName
+    // debugger
+    // console.log(theName);
+    // window.alert(luckyOne.fullName)
   }
 
 
@@ -44,6 +65,15 @@ class QuestionButton extends PureComponent {
 
     return (
       <div>
+        <Dialog
+          title="Join Game"
+          actions={actions}
+          modal={false}
+          open={this.props.open}
+          onRequestClose={this.handleClose}
+        >
+          Hey there! Would you like to join this game?
+        </Dialog>
         <RaisedButton
           className="QuestionButton"
           label="Ask question???"
@@ -55,8 +85,4 @@ class QuestionButton extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ currentUser }) => ({
-  signedIn: !!currentUser && !!currentUser._id,
-})
-
-export default connect(mapStateToProps)(QuestionButton)
+export default QuestionButton

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import RaisedButton from 'material-ui/RaisedButton'
-// import ReactMarkdown from 'react-markdown'
 import fetchBatches from '../actions/batches/fetch'
 import Title from '../components/Title'
 // import QuestionButton from './QuestionButton'
@@ -23,33 +22,25 @@ export class showBatch extends PureComponent {
   }
 
   componentWillMount() {
-    // const { _id } = this.props
     this.props.fetchBatches()
   }
 
-  renderStudentColor() {}
+  renderStudentColor(student) {
+    this.lastEvaluation(student).color
+  }
+
+  lastEvaluation(student) {
+    return student.evaluation[student.evaluation.length - 1]
+  }
 
   renderStudents(student, index) {
-    console.log(student);
-    // debugger
     return (
-      // <div key={index} { ...student } />
       <div key={index} className="studentnumber">
         <Link to={`/batches/${this.props._id}/students/${student._id}`}>
           <h3>{student.fullName}</h3>
         </Link>
         <img src={student.picture} />
-        {/* <div
-
-          className="cover"
-        style={{ backgroundImage: `url(${student.picture || PLACEHOLDER })` }} /> */}
-
-        {/* #FIXME //get last color out array:
-          student.evaluation[students.length - 1].color
-          vs. student.evaluation.slice(-1)
-          -> arr[(arr.slice(-2, -1))[0]]
-        */}
-        {/* <p>First color in array: {student.evaluation[0].color}</p> */}
+        <p>Last color in array: {this.lastEvaluation(student).color}</p>
       </div>
     )
   }
@@ -67,34 +58,54 @@ export class showBatch extends PureComponent {
     }
   }
 
-  receiveStudentArray() {
+  getAllStudents(students) {
 
   }
+
+  // checkColorValid() {
+  //   // check if there is a student with the selected color who hasn't been asked yet today
+  //   let color = this.selectColor()
+  //   if (color)
+  // }
 
   askQuestionTo(students) {
-  //   console.log(this.selectColor());
-  //   // filter over students then random
-  //   // console.log("students: " + students);
-  //   const fullNames = students.map((s) => s.fullName)
-  //   // let color = this.selectColor()
-  //   const luckyOnes =
-  //   students.filter((stud) => {
-  //     if (stud.evaluation[stud.length - 1].color === this.selectColor()) //can only test this when I have seeds for all colors
-  //       return stud
-  //       debugger
-  //   })
-  //
-  //   // debugger
-  //   const luckyOne = luckyOnes[Math.floor(Math.random() * luckyOnes.length)]
-  //
-  //   // write in one select
-  //   // students.evaluation[0].color  selectColor()
-  //   //
-  //   // students.evaluation[0][Math.floor(Math.random() * students.length)]
-  //   //
-  //   console.log(luckyOne);
-  //   window.alert(luckyOne)
+    const luckyOnes = students.filter((stud) => {
+      if (this.lastEvaluation(stud).color === this.selectColor()) {
+        return stud
+      }
+    })
+    // if (luckyOnes == '')
+    // if (luckyOnes === [])
+      // askQuestionTo(students)
+
+    const luckyOne = (luckyOnes[Math.floor(Math.random() * luckyOnes.length)]).fullName
+    // const theName = luckyOne.fullName
+    // debugger
+    // console.log(theName);
+    // window.alert(luckyOne.fullName)
   }
+
+  showColorPercentage(students) {
+    let green = students.filter((student) => {
+      if (this.lastEvaluation(student).color === "green")
+      return student
+    })
+    let red = students.filter((student) => {
+      if (this.lastEvaluation(student).color === "red")
+      return student
+    })
+    let yellow = students.filter((student) => {
+      if (this.lastEvaluation(student).color === "yellow")
+      return student
+    })
+
+    const total = green.length + red.length + yellow.length
+    const greenPercentage = (green.length / total) * 100
+    const yellowPercentage = (yellow.length / total) * 100
+    const redPercentage = (red.length / total) * 100
+
+  }
+
 
   render() {
     const {
@@ -111,14 +122,16 @@ export class showBatch extends PureComponent {
     return(
       <article className="batch-student">
         <header>
+
           {/* <div
             className="cover"
           style={{ backgroundImage: `url(${batches.student.picture})` }} /> */}
           <Title content={`Batch number: ${batchNumber} `} />
         </header>
+        {/* <div className="color-bar">{this.showColorPercentage(students).bind(this)}</div> */}
         <RaisedButton
           label="Who is the lucky one?"
-          // onClick={ this.askQuestionTo(students).bind(this) }
+          onClick={ this.askQuestionTo(students).bind(this) }
         />
         <div className="cover">{students.map(this.renderStudents.bind(this))}</div>
         <main>
