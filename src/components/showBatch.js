@@ -2,12 +2,12 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import ReactMarkdown from 'react-markdown'
-import './BatchItem.css'
+import RaisedButton from 'material-ui/RaisedButton'
+// import ReactMarkdown from 'react-markdown'
 import fetchBatches from '../actions/batches/fetch'
 import Title from '../components/Title'
 // import QuestionButton from './QuestionButton'
-import RaisedButton from 'material-ui/RaisedButton'
+import './ShowBatch.css'
 
 
 
@@ -109,7 +109,7 @@ export class showBatch extends PureComponent {
     if (!_id) return null
 
     return(
-      <article className="batch-page">
+      <article className="batch-student">
         <header>
           {/* <div
             className="cover"
@@ -120,7 +120,7 @@ export class showBatch extends PureComponent {
           label="Who is the lucky one?"
           // onClick={ this.askQuestionTo(students).bind(this) }
         />
-        <div>{students.map(this.renderStudents.bind(this))}</div>
+        <div className="cover">{students.map(this.renderStudents.bind(this))}</div>
         <main>
         </main>
       </article>
