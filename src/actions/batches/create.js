@@ -15,7 +15,7 @@ export default (newBatch) => {
     dispatch({ type: APP_LOADING })
 
     const backend = api.service('batches')
-
+    debugger
     backend.create(newBatch)
       .then((result) => {
         dispatch({ type: APP_DONE_LOADING })

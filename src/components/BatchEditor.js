@@ -35,7 +35,7 @@ class BatchEditor extends PureComponent {
     const { replace, signedIn, showError } = newProps
     if (!signedIn) {
       showError('You need to be signed up to create batches!')
-      replace('/sign-up')
+      replace('/sign-in')
     }
   }
 
@@ -48,16 +48,16 @@ class BatchEditor extends PureComponent {
 
   updateStartDate(event, date) {
     this.setState({
-      starts: this.date
+      starts: date
     })
-    console.log("start date:::" + date);
+    // console.log("start date:::" + date);
   }
 
   updateEndDate(event, date) {
     this.setState({
-      ends: this.date
+      ends: date
     })
-    console.log("end date:::" + date);
+    // console.log("end date:::" + date);
   }
 
 
