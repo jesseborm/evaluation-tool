@@ -5,6 +5,7 @@ import { Link } from 'react-router'
 import RaisedButton from 'material-ui/RaisedButton'
 import fetchBatches from '../actions/batches/fetch'
 import Title from '../components/Title'
+import QuestionButton from './QuestionButton'
 // import QuestionButton from './QuestionButton'
 import './ShowBatch.css'
 
@@ -12,7 +13,7 @@ import './ShowBatch.css'
 
 const PLACEHOLDER = 'http://via.placeholder.com/500x180?text=No%20Image'
 
-export class showBatch extends PureComponent {
+export class ShowBatch extends PureComponent {
   static propTypes = {
     _id: PropTypes.string,
     batchNumber: PropTypes.string,
@@ -129,9 +130,9 @@ export class showBatch extends PureComponent {
           <Title content={`Batch number: ${batchNumber} `} />
         </header>
         {/* <div className="color-bar">{this.showColorPercentage(students).bind(this)}</div> */}
-        <RaisedButton
-          label="Who is the lucky one?"
-          onClick={ this.askQuestionTo(students).bind(this) }
+        <QuestionButton 
+        // label="Who is the lucky one?"
+        // onClick={ this.askQuestionTo(students).bind(this) }
         />
         <div className="cover">{students.map(this.renderStudents.bind(this))}</div>
         <main>
@@ -155,4 +156,4 @@ const mapStateToProps = ({ batches }, { params }) => {
   }
 }
 
-export default connect(mapStateToProps, { fetchBatches })(showBatch)
+export default connect(mapStateToProps, { fetchBatches })(ShowBatch)

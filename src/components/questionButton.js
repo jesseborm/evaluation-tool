@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react'
+import { Link } from 'react-router'
 import PropTypes from 'prop-types'
 import RaisedButton from 'material-ui/RaisedButton'
+import FlatButton from 'material-ui/FlatButton'
 import StarIcon from 'material-ui/svg-icons/action/favorite'
 import Dialog from 'material-ui/Dialog'
 import './QuestionButton.css'
@@ -9,6 +11,21 @@ class QuestionButton extends PureComponent {
   // static propTypes = {
   //   students: PropTypes.array.isRequired
   // }
+  // static propTypes = {
+  //   open: PropTypes.bool,
+  // }
+
+  state = {
+    open: false,
+  };
+
+  handleOpen = () => {
+    this.setState({open: true});
+  };
+
+  handleClose = () => {
+    this.setState({open: false});
+  };
 
   selectColor() {
     let chance = Math.random()
@@ -56,30 +73,45 @@ class QuestionButton extends PureComponent {
     // debugger
     // console.log(theName);
     // window.alert(luckyOne.fullName)
+    // return luckOne
   }
 
 
 
   render() {
-    if (!this.props.signedIn) return null
+    // link to go to studentpage
+    const actions = [
+      <Link to="/">
+        <FlatButton
+          label="Go to student page"
+          primary={true} />
+      </Link>,
+      <FlatButton
+        label="next "
+        primary={true}
+        keyboardFocused={true}
+        onTouchTap={this.handleClose}
+      />,
+    ]
 
     return (
       <div>
+        <RaisedButton label="Ask away" onTouchTap={this.handleOpen} />
         <Dialog
-          title="Join Game"
+          title="Ask questionn dialog"
           actions={actions}
           modal={false}
-          open={this.props.open}
+          open={this.state.open}
           onRequestClose={this.handleClose}
         >
-          Hey there! Would you like to join this game?
+          This is the lucky name:
         </Dialog>
-        <RaisedButton
+        {/* <RaisedButton
           className="QuestionButton"
           label="Ask question???"
           onClick="/ask-question"
           primary={true}
-          icon={<StarIcon />} />
+        icon={<StarIcon />} /> */}
       </div>
     )
   }

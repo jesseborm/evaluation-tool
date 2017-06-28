@@ -7,7 +7,7 @@ import './BatchItem.css'
 import fetchBatches from '../actions/batches/fetch'
 import Title from '../components/Title'
 
-export class showBatch extends PureComponent {
+export class ShowStudent extends PureComponent {
   static propTypes = {
     _id: PropTypes.string,
     batchNumber: PropTypes.string,
@@ -90,4 +90,4 @@ const mapStateToProps = ({ batches }, { params }) => {
   }
 }
 
-export default connect(mapStateToProps, { fetchBatches })(showBatch)
+export default connect(mapStateToProps, { fetchBatches })(ShowStudent)

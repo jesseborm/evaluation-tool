@@ -9,7 +9,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 
 import App from './App'
 import BatchesContainer from './components/BatchesContainer'
-import showBatch from './components/showBatch'
+import ShowBatch from './components/ShowBatch'
 import BatchEditor from './components/BatchEditor'
 // import SignUp from './users/SignUp'
 import SignIn from './users/SignIn'
@@ -25,7 +25,7 @@ ReactDOM.render(
     <Router history={history}>
       <Route path="/" component={App}>
         <IndexRoute component={BatchesContainer} />
-        <Route path="/batches/:batchId" component={showBatch} />
+        <Route path="/batches/:batchId" component={ShowBatch} />
         <Route path="/create-batch" component={BatchEditor} />
         <Route path="/sign-in" component={SignIn} />
       </Route>
