@@ -27,6 +27,10 @@ export class showBatch extends PureComponent {
     this.props.fetchBatches()
   }
 
+  renderStudentColor() {
+
+  }
+
   renderStudents(student, index) {
     console.log(student);
     // debugger
@@ -108,7 +112,7 @@ export class showBatch extends PureComponent {
     if (!_id) return null
 
     return(
-      <article className="Batch page">
+      <article className="batch-page">
         <header>
           {/* <div
             className="cover"
