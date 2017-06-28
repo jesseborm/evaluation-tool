@@ -1,7 +1,7 @@
 import { USER_SIGNED_IN } from '../actions/user/sign-in'
 import { USER_SIGNED_OUT } from '../actions/user/sign-out'
 
-const currentUserKey = 'teacherUser'
+const currentUserKey = 'teacherUserB8'
 const currentUserFromLocalStorage = JSON.parse(
   window.localStorage.getItem(currentUserKey) || 'null'
 )

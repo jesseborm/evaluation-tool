@@ -41,7 +41,13 @@ export class showBatch extends PureComponent {
 
           className="cover"
         style={{ backgroundImage: `url(${student.picture || PLACEHOLDER })` }} /> */}
-        <p>Recent color: {student.evaluation[0].color}</p>
+
+        {/* #FIXME //get last color out array:
+          student.evaluation[students.length - 1].color
+          vs. student.evaluation.slice(-1)
+          -> arr[(arr.slice(-2, -1))[0]]
+        */}
+        <p>First color in array: {student.evaluation[0].color}</p>
       </div>
     )
   }
@@ -72,7 +78,7 @@ export class showBatch extends PureComponent {
     let color = this.selectColor()
     const luckyOnes =
     students.filter((stud) => {
-      if (stud.evaluation[0].color === color) //can only test this when I have seeds for all colors
+      if (stud.evaluation[stud.length - 1].color === color) //can only test this when I have seeds for all colors
         return stud
         debugger
     })
