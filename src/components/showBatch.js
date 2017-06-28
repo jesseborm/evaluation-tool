@@ -2,12 +2,12 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import ReactMarkdown from 'react-markdown'
-import './ShowBatch.css'
+import RaisedButton from 'material-ui/RaisedButton'
+// import ReactMarkdown from 'react-markdown'
 import fetchBatches from '../actions/batches/fetch'
 import Title from '../components/Title'
 // import QuestionButton from './QuestionButton'
-import RaisedButton from 'material-ui/RaisedButton'
+import './ShowBatch.css'
 
 
 
