@@ -27,6 +27,10 @@ export class showBatch extends PureComponent {
     this.props.fetchBatches()
   }
 
+  renderStudentColor() {
+    
+  }
+
   renderStudents(student, index) {
     console.log(student);
     // debugger

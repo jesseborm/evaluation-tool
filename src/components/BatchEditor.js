@@ -47,10 +47,11 @@ class BatchEditor extends PureComponent {
 
 
   updateStartDate(event, date) {
+    const dateJs = new Date(date)
     this.setState({
-      starts: this.date
+      starts: this.dateJs
     })
-    console.log("start date:::" + date);
+    console.log("start date:::" + dateJs);
   }
 
   updateEndDate(event, date) {
