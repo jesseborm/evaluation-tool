@@ -35,7 +35,7 @@ class BatchEditor extends PureComponent {
     const { replace, signedIn, showError } = newProps
     if (!signedIn) {
       showError('You need to be signed up to create batches!')
-      replace('/sign-up')
+      replace('/sign-in')
     }
   }
 

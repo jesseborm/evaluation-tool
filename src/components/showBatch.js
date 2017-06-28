@@ -28,7 +28,11 @@ export class showBatch extends PureComponent {
   }
 
   renderStudentColor() {
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> styling/batch-page
   }
 
   renderStudents(student, index) {
@@ -112,7 +116,7 @@ export class showBatch extends PureComponent {
     if (!_id) return null
 
     return(
-      <article className="Batch page">
+      <article className="batch-page">
         <header>
           {/* <div
             className="cover"
