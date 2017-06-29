@@ -1,5 +1,6 @@
-// src/actions/user/sign-up.js
+// src/actions/add-student.js
 
+import { history } from '../../store'
 import API from '../../api'
 import {
   APP_LOADING,
@@ -7,23 +8,27 @@ import {
   LOAD_ERROR,
   LOAD_SUCCESS
 } from '../loading'
-import signIn from './sign-in'
 
-export const USER_SIGNED_UP = 'USER_SIGNED_UP'
+const STUDENT_ADDED = 'STUDENT_ADDED'
 
 const api = new API()
 
-export default (user) => {
+export default (batchId, newStudent) => {
   return (dispatch) => {
     dispatch({ type: APP_LOADING })
 
-    const backend = api.service('users')
+    const backend = api.service('batches')
 
-    backend.create(user)
+    backend.patch(batchId, newStudent)
+
       .then((result) => {
         dispatch({ type: APP_DONE_LOADING })
         dispatch({ type: LOAD_SUCCESS })
-        dispatch(signIn(user))
+
+        // dispatch({ type: STUDENT_ADDED })
+        // history.replace('/batches/:batchId')
+        // history.replace(`/batches/:${_id}`)
+
       })
       .catch((error) => {
         dispatch({ type: APP_DONE_LOADING })

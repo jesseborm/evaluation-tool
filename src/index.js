@@ -10,8 +10,8 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 import App from './App'
 import BatchesContainer from './batches/BatchesContainer'
 import ShowBatch from './batches/ShowBatch'
-import ShowStudent from './students/ShowStudent'
 import BatchEditor from './batches/BatchEditor'
+import ShowStudent from './students/ShowStudent'
 import StudentEditor from './students/StudentEditor'
 import SignIn from './users/SignIn'
 
@@ -29,7 +29,7 @@ ReactDOM.render(
         <Route path="/batches/:batchId" component={ShowBatch} />
         <Route path="/batches/:batchId/students/:studentId" component={ShowStudent} />
         <Route path="/create-batch" component={BatchEditor} />
-        <Route path="/create-batch" component={StudentEditor} />
+        <Route path="/batches/:batchId/add-student" component={StudentEditor} />
         <Route path="/sign-in" component={SignIn} />
       </Route>
     </Router>
