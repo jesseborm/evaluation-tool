@@ -2,9 +2,8 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import ReactMarkdown from 'react-markdown'
-import './BatchItem.css'
 import { Link } from 'react-router'
+import './BatchItem.css'
 
 const PLACEHOLDER = 'http://via.placeholder.com/500x180?text=No%20Image'
 

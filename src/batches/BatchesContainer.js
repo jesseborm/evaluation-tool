@@ -7,10 +7,10 @@ import FlatButton from 'material-ui/FlatButton'
 import Title from '../components/Title'
 import BatchItem from './BatchItem'
 import removeBatch from '../actions/batches/remove'
-import './BatchesContainer.css'
 import fetchBatches from '../actions/batches/fetch'
 import subscribeToBatchesService from '../actions/batches/subscribe'
 import CreateBatchButton from './CreateBatchButton'
+import './BatchesContainer.css'
 
 
 export class BatchesContainer extends PureComponent {
