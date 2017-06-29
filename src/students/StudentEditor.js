@@ -65,13 +65,13 @@ class BatchEditor extends PureComponent {
   //   })
   // }
 
-  validate(batch) {
-    const { fullName, picture } = batch
+  validate(student) {
+    const { fullName, picture } = student
 
     let errors = {}
 
-    if (!fullName || fullName === '') errors.fullName = 'We need a fullName..!'
-    if (!picture || picture === '') errors.picture = 'We need a picture, cmon!'
+    if (!fullName || fullName === '') errors.fullName = 'We need a fullName!'
+    if (!picture || picture === '') errors.picture = 'In need of a picture!'
 
     this.setState({
       errors,
@@ -91,12 +91,15 @@ class BatchEditor extends PureComponent {
       picture,
     }
 
+    const { currentBatch } = this.props
+
     if (this.validate(student)) {
       console.log(student)
-      const { batchId } = this.props.params
-      this.props.addStudent(batchId, student)
-      debugger
-      this.props.push(`/batches/${batchId}`)
+      const { _id } = currentBatch
+      // const { batchId } = this.props
+      // debugger
+      this.props.addStudent(currentBatch._id, student)
+      // this.props.push(`/batches/${batchId}`)
     }
   }
 
@@ -143,7 +146,8 @@ class BatchEditor extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ currentUser }) => ({
+const mapStateToProps = ({ currentUser, currentBatch }) => ({
   signedIn: !!currentUser && !!currentUser._id,
+  currentBatch
 })
 export default connect(mapStateToProps, { addStudent, replace, showError })(BatchEditor)

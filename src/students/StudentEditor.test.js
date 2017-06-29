@@ -4,6 +4,7 @@ import chai, { expect } from 'chai'
 import spies from 'chai-spies'
 import { shallow } from 'enzyme'
 import chaiEnzyme from 'chai-enzyme'
+
 import { StudentEditor } from './StudentEditor'
 import createBatch from '../actions/batches/create'
 import batches from '../seeds/batches'
@@ -47,6 +48,8 @@ describe('StudentEditor', () => {
     expect(fetchBatches).to.have.been.called.exactly.once()
   })
 })
+
+
 
 describe('Adding a student to a batch', () => {
   const createBatch = chai.spy()
