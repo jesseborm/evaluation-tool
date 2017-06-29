@@ -1,20 +1,20 @@
 // src/batches/StudentEditor.js
 import React, { PureComponent } from 'react'
-import Editor from 'react-medium-editor'
-import toMarkdown from 'to-markdown'
 import { connect } from 'react-redux'
 import { replace } from 'react-router-redux'
+// import Editor from 'react-medium-editor'
+// import toMarkdown from 'to-markdown'
 import createBatch from '../actions/batches/create'
 import { showError } from '../actions/loading'
 import 'medium-editor/dist/css/medium-editor.css'
 import 'medium-editor/dist/css/themes/default.css'
 import '../batches/BatchEditor.css'
 
-const COLORS = [
-  'yellow',
-  'green',
-  'red'
-]
+// const COLORS = [
+//   'yellow',
+//   'green',
+//   'red'
+// ]
 
 class BatchEditor extends PureComponent {
   constructor(props) {
@@ -39,7 +39,13 @@ class BatchEditor extends PureComponent {
     }
   }
 
+  //# FIXME // change in model
+  // makeFullName(firstName, lastName) {
+  //   return const fullName = firstName + ' ' + lastName
+  // }
+
   updateFullName(event) {
+    // this.makeFullName(f, l)
     this.setState({
       fullName: this.refs.fullName.value
     })
@@ -51,13 +57,13 @@ class BatchEditor extends PureComponent {
     })
   }
 
-  setColor(event) {
-    this.setState({
-      green: event.target.value === 'green',
-      yellow: event.target.value === 'yellow',
-      red: event.target.value === 'red'
-    })
-  }
+  // setInitialColor(event) {
+  //   this.setState({
+  //     green: event.target.value === 'green',
+  //     yellow: event.target.value === 'yellow',
+  //     red: event.target.value === 'red'
+  //   })
+  // }
 
   validate(batch) {
     const { fullName, picture } = batch
@@ -120,8 +126,8 @@ class BatchEditor extends PureComponent {
         {/* Possible use for initial color */}
         {/* {TYPES.map((type) => {
           return <label key={color} htmlFor={color}>
-            <input id={color} type="radio" name="color" value={color} onChange={this.setColor.bind(this)} />
-            {color}
+          <input id={color} type="radio" name="color" value={color} onChange={this.setColor.bind(this)} />
+          {color}
           </label>
         })} */}
 

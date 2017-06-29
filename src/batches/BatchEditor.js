@@ -1,6 +1,6 @@
 // src/components/BatchEditor.js
 import React, { PureComponent } from 'react'
-import Editor from 'react-medium-editor'
+// import Editor from 'react-medium-editor'
 import DatePicker from 'material-ui/DatePicker'
 import { connect } from 'react-redux'
 import { replace } from 'react-router-redux'

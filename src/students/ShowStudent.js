@@ -2,8 +2,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Link } from 'react-router'
-import ReactMarkdown from 'react-markdown'
+// import { Link } from 'react-router'
 import fetchBatches from '../actions/batches/fetch'
 import Title from '../components/Title'
 import '../batches/ShowBatch.css'
@@ -33,7 +32,7 @@ export class ShowStudent extends PureComponent {
     return (
       <div key={index} className="studentnumber">
         <h3>{student.fullName}</h3>
-        <img src={student.picture} />
+        <img src={student.picture} alt=''/>
       </div>
     )
   }
