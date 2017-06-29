@@ -2,25 +2,35 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
+<<<<<<< HEAD:src/students/ShowStudent.js
 import ReactMarkdown from 'react-markdown'
+=======
+import './BatchItem.css'
+>>>>>>> question-button:src/components/showStudent.js
 import fetchBatches from '../actions/batches/fetch'
 import Title from '../components/Title'
 import '../batches/BatchItem.css'
 
-export class showBatch extends PureComponent {
+export class ShowStudent extends PureComponent {
   static propTypes = {
     _id: PropTypes.string,
     batchNumber: PropTypes.string,
-    starts: PropTypes.instanceOf(Date),
-    ends: PropTypes.instanceOf(Date),
-    students: PropTypes.Array
+    students: PropTypes.Array,
+    // evaluation: PropTypes.Array
   }
 
   componentWillMount() {
-    // const { _id } = this.props
+    const { batch, student } = this.props
+    const { studentId } = this.props.params
     this.props.fetchBatches()
   }
 
+
+  // getStudents() {
+  //   // const students = batches._id.students
+  //   const student = batch.students.find((student) => (student._id === this.props.params.studentId))
+  //   debugger
+  // }
 
   renderStudents(student, index) {
     return (
@@ -34,60 +44,72 @@ export class showBatch extends PureComponent {
   renderEvaluation(evaluation, index) {
     return (
       <div key={index} className="studentevaluation">
-        {evaluations[0].}
-        <h3>{evaluations[0].color}</h3>
+        {/* {evaluations[0].} */}
+        <h3>{evaluation[0].color}</h3>
 
       </div>
     )
   }
 
   render() {
+    const {batch} = this.props
+    const {studentId, batchId } = this.props.params
+    if(!!!batch) return null
+    const student = batch.students.find(stud => stud._id.toString() === studentId.toString())
     const {
-      _id,
+    //
+    //   // _id,
       batchNumber,
-      starts,
-      ends,
-      students,
-      evaluations,
+    //   student,
+    //   // evaluation,
+    //   // fullName,
+    //   // params,
     } = this.props
 
-
-    if (!_id) return null
-
+    // const { studentId } = this.props.params
+debugger
     return(
       <article className="Batch page">
         <header>
           <Title content={`Student: ${student.fullName} `} />
         </header>
-        <div>
+        <div>Batchnumberrr: {batchNumber}</div>
+        {/* <div>{students.map((s) => s.fullName)}</div> */}
+        {/* <div>
           {students.map(
             this
             .renderStudents
             .bind(this))}
-        </div>
+        </div> */}
       </article>
     )
   }
 }
 
 const mapStateToProps = ({ batches }, { params }) => {
-  const batch = batches.reduce((prev, next) => {
-    if (next._id === params.batchId) {
-      return next
-    }
-    return prev
-  }, {}),
 
-  const student = batch.students.reduce((prev, next) => {
-    if (next._id === params.studentId) {
-      return next
+    const batch = batches.reduce((prev, next) => {
+      if (next._id === params.batchId) {
+        return next
+      }
+      return prev
+    }, {})
+    return {
+      ...batch
     }
-    return prev
-  }, {})
 
-  return {
-    ...batch
-  }
+    // const student = batch.students
+    // .find((student) => (student._id === params.studentId))
+
+    // const student = batch.students.reduce((prev, next) => {
+    //   if (next._id === params.studentId) {
+    //     return next
+    //   }
+    //   return prev
+    // }, {})
+    // return {
+    //   ...student
+    // }
 }
 
-export default connect(mapStateToProps, { fetchBatches })(showBatch)
+export default connect(mapStateToProps, { fetchBatches })(ShowStudent)

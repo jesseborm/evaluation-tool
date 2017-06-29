@@ -6,13 +6,18 @@ import RaisedButton from 'material-ui/RaisedButton'
 
 import fetchBatches from '../actions/batches/fetch'
 import Title from '../components/Title'
+<<<<<<< HEAD:src/batches/showBatch.js
 // import QuestionButton from '../components/QuestionButton'
+=======
+import QuestionButton from './QuestionButton'
+// import QuestionButton from './QuestionButton'
+>>>>>>> question-button:src/components/showBatch.js
 import './ShowBatch.css'
 
 
 const PLACEHOLDER = 'http://via.placeholder.com/500x180?text=No%20Image'
 
-export class showBatch extends PureComponent {
+export class ShowBatch extends PureComponent {
   static propTypes = {
     _id: PropTypes.string,
     batchNumber: PropTypes.string,
@@ -43,46 +48,6 @@ export class showBatch extends PureComponent {
         <p>Last color in array: {this.lastEvaluation(student).color}</p>
       </div>
     )
-  }
-  //////////////////////////////////////////////
-  selectColor() {
-    // debugger
-    let chance = Math.random()
-
-    if (chance <= .17) {
-      return "green"
-    } else if (chance > .5) {
-      return "red"
-    } else {
-      return "yellow"
-    }
-  }
-
-  getAllStudents(students) {
-
-  }
-
-  // checkColorValid() {
-  //   // check if there is a student with the selected color who hasn't been asked yet today
-  //   let color = this.selectColor()
-  //   if (color)
-  // }
-
-  askQuestionTo(students) {
-    const luckyOnes = students.filter((stud) => {
-      if (this.lastEvaluation(stud).color === this.selectColor()) {
-        return stud
-      }
-    })
-    // if (luckyOnes == '')
-    // if (luckyOnes === [])
-      // askQuestionTo(students)
-
-    const luckyOne = (luckyOnes[Math.floor(Math.random() * luckyOnes.length)]).fullName
-    // const theName = luckyOne.fullName
-    // debugger
-    // console.log(theName);
-    // window.alert(luckyOne.fullName)
   }
 
   showColorPercentage(students) {
@@ -116,7 +81,6 @@ export class showBatch extends PureComponent {
       students,
     } = this.props
 
-
     if (!_id) return null
 
     return(
@@ -129,9 +93,9 @@ export class showBatch extends PureComponent {
           <Title content={`Batch number: ${batchNumber} `} />
         </header>
         {/* <div className="color-bar">{this.showColorPercentage(students).bind(this)}</div> */}
-        <RaisedButton
-          label="Who is the lucky one?"
-          onClick={ this.askQuestionTo(students).bind(this) }
+        <QuestionButton
+          // label="Who is the lucky one?"
+          // onClick={ this.askQuestionTo(students).bind(this) }
         />
         <div className="cover">{students.map(this.renderStudents.bind(this))}</div>
         <main>
@@ -155,4 +119,4 @@ const mapStateToProps = ({ batches }, { params }) => {
   }
 }
 
-export default connect(mapStateToProps, { fetchBatches })(showBatch)
+export default connect(mapStateToProps, { fetchBatches })(ShowBatch)
