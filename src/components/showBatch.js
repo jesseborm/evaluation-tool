@@ -131,8 +131,8 @@ export class ShowBatch extends PureComponent {
         </header>
         {/* <div className="color-bar">{this.showColorPercentage(students).bind(this)}</div> */}
         <QuestionButton 
-        // label="Who is the lucky one?"
-        // onClick={ this.askQuestionTo(students).bind(this) }
+          // label="Who is the lucky one?"
+          // onClick={ this.askQuestionTo(students).bind(this) }
         />
         <div className="cover">{students.map(this.renderStudents.bind(this))}</div>
         <main>
