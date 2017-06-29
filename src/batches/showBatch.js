@@ -1,3 +1,4 @@
+// src/batches/showBatch.js
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -6,12 +7,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 
 import fetchBatches from '../actions/batches/fetch'
 import Title from '../components/Title'
-<<<<<<< HEAD:src/batches/showBatch.js
 // import QuestionButton from '../components/QuestionButton'
-=======
-import QuestionButton from './QuestionButton'
-// import QuestionButton from './QuestionButton'
->>>>>>> question-button:src/components/showBatch.js
 import './ShowBatch.css'
 
 
