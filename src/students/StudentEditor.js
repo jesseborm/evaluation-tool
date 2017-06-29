@@ -26,7 +26,7 @@ class BatchEditor extends PureComponent {
 
     this.state = {
       fullName,
-      picture
+      picture,
       errors: {},
     }
   }
@@ -118,12 +118,12 @@ class BatchEditor extends PureComponent {
         { errors.picture && <p className="error">{ errors.picture }</p> }
 
         {/* Possible use for initial color */}
-        {TYPES.map((type) => {
+        {/* {TYPES.map((type) => {
           return <label key={color} htmlFor={color}>
             <input id={color} type="radio" name="color" value={color} onChange={this.setColor.bind(this)} />
             {color}
           </label>
-        })}
+        })} */}
 
         <div className="actions">
           <button className="primary" onClick={this.saveBatch.bind(this)}>Save</button>

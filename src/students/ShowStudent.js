@@ -4,10 +4,9 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import ReactMarkdown from 'react-markdown'
-import './BatchItem.css'
 import fetchBatches from '../actions/batches/fetch'
 import Title from '../components/Title'
-import '../batches/BatchItem.css'
+import '../batches/ShowBatch.css'
 
 export class ShowStudent extends PureComponent {
   static propTypes = {

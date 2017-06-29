@@ -7,7 +7,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 
 import fetchBatches from '../actions/batches/fetch'
 import Title from '../components/Title'
-// import QuestionButton from '../components/QuestionButton'
+import QuestionButton from '../components/QuestionButton'
 import './ShowBatch.css'
 
 
