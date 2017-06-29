@@ -1,10 +1,10 @@
 // src/components/BatchEditor.js
 import React, { PureComponent } from 'react'
 import Editor from 'react-medium-editor'
-import toMarkdown from 'to-markdown'
 import DatePicker from 'material-ui/DatePicker'
 import { connect } from 'react-redux'
 import { replace } from 'react-router-redux'
+
 import createBatch from '../actions/batches/create'
 import { showError } from '../actions/loading'
 import 'medium-editor/dist/css/medium-editor.css'

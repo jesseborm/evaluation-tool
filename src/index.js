@@ -8,10 +8,10 @@ import registerServiceWorker from './registerServiceWorker'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 
 import App from './App'
-import BatchesContainer from './components/BatchesContainer'
-import showBatch from './components/showBatch'
-import BatchEditor from './components/BatchEditor'
-// import SignUp from './users/SignUp'
+import BatchesContainer from './batches/BatchesContainer'
+import ShowBatch from './batches/ShowBatch'
+import ShowStudent from './students/ShowStudent'
+import BatchEditor from './batches/BatchEditor'
 import SignIn from './users/SignIn'
 
 import './index.css'
@@ -25,7 +25,8 @@ ReactDOM.render(
     <Router history={history}>
       <Route path="/" component={App}>
         <IndexRoute component={BatchesContainer} />
-        <Route path="/batches/:batchId" component={showBatch} />
+        <Route path="/batches/:batchId" component={ShowBatch} />
+        <Route path="/batches/:batchId/students/:studentId" component={ShowStudent} />
         <Route path="/create-batch" component={BatchEditor} />
         <Route path="/sign-in" component={SignIn} />
       </Route>

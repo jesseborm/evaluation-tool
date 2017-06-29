@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import RaisedButton from 'material-ui/RaisedButton'
+
 import fetchBatches from '../actions/batches/fetch'
 import Title from '../components/Title'
-// import QuestionButton from './QuestionButton'
+// import QuestionButton from '../components/QuestionButton'
 import './ShowBatch.css'
-
 
 
 const PLACEHOLDER = 'http://via.placeholder.com/500x180?text=No%20Image'

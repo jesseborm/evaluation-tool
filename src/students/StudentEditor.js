@@ -8,7 +8,7 @@ import createBatch from '../actions/batches/create'
 import { showError } from '../actions/loading'
 import 'medium-editor/dist/css/medium-editor.css'
 import 'medium-editor/dist/css/themes/default.css'
-import './BatchEditor.css'
+import '../batches/BatchEditor.css'
 
 const COLORS = [
   'yellow',

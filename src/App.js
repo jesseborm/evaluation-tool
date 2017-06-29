@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Loading from './components/Loading'
-import LoadErrorMessage from './components/LoadErrorMessage'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import muiTheme from './styles/theme'
-import Navigation from './components/Navigation'
 
+import Loading from './components/Loading'
+import LoadErrorMessage from './components/LoadErrorMessage'
+import Navigation from './components/Navigation'
 import './App.css'
 
 class App extends Component {
