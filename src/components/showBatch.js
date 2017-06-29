@@ -45,46 +45,6 @@ export class ShowBatch extends PureComponent {
       </div>
     )
   }
-  //////////////////////////////////////////////
-  selectColor() {
-    // debugger
-    let chance = Math.random()
-
-    if (chance <= .17) {
-      return "green"
-    } else if (chance > .5) {
-      return "red"
-    } else {
-      return "yellow"
-    }
-  }
-
-  getAllStudents(students) {
-
-  }
-
-  // checkColorValid() {
-  //   // check if there is a student with the selected color who hasn't been asked yet today
-  //   let color = this.selectColor()
-  //   if (color)
-  // }
-
-  askQuestionTo(students) {
-    const luckyOnes = students.filter((stud) => {
-      if (this.lastEvaluation(stud).color === this.selectColor()) {
-        return stud
-      }
-    })
-    // if (luckyOnes == '')
-    // if (luckyOnes === [])
-      // askQuestionTo(students)
-
-    const luckyOne = (luckyOnes[Math.floor(Math.random() * luckyOnes.length)]).fullName
-    // const theName = luckyOne.fullName
-    // debugger
-    // console.log(theName);
-    // window.alert(luckyOne.fullName)
-  }
 
   showColorPercentage(students) {
     let green = students.filter((student) => {
@@ -117,7 +77,6 @@ export class ShowBatch extends PureComponent {
       students,
     } = this.props
 
-
     if (!_id) return null
 
     return(
@@ -130,7 +89,7 @@ export class ShowBatch extends PureComponent {
           <Title content={`Batch number: ${batchNumber} `} />
         </header>
         {/* <div className="color-bar">{this.showColorPercentage(students).bind(this)}</div> */}
-        <QuestionButton 
+        <QuestionButton
           // label="Who is the lucky one?"
           // onClick={ this.askQuestionTo(students).bind(this) }
         />
