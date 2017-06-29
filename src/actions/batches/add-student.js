@@ -25,7 +25,10 @@ export default (batchId, newStudent) => {
         dispatch({ type: APP_DONE_LOADING })
         dispatch({ type: LOAD_SUCCESS })
 
-        // dispatch({ type: STUDENT_ADDED })
+        dispatch({
+          type: STUDENT_ADDED,
+          payload: result
+        })
         // history.replace('/batches/:batchId')
         // history.replace(`/batches/:${_id}`)
 
