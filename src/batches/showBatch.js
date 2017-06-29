@@ -8,6 +8,7 @@ import { Link } from 'react-router'
 import fetchBatches from '../actions/batches/fetch'
 import Title from '../components/Title'
 import QuestionButton from '../components/QuestionButton'
+import AddStudentButton from '../students/AddStudentButton'
 import './ShowBatch.css'
 
 
@@ -89,10 +90,13 @@ export class ShowBatch extends PureComponent {
           <Title content={`Batch number: ${batchNumber} `} />
         </header>
         {/* <div className="color-bar">{this.showColorPercentage(students).bind(this)}</div> */}
-        <QuestionButton
-          // label="Who is the lucky one?"
-          // onClick={ this.askQuestionTo(students).bind(this) }
-        />
+        <div>
+          <QuestionButton
+            // label="Who is the lucky one?"
+            // onClick={ this.askQuestionTo(students).bind(this) }
+          />
+          <AddStudentButton />
+        </div>
         <div className="cover">{students.map(this.renderStudents.bind(this))}</div>
         <main>
         </main>

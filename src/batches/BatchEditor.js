@@ -16,12 +16,7 @@ class BatchEditor extends PureComponent {
   constructor(props) {
     super()
 
-    // const { batch, start, ends } = props
     const { batchNumber, starts, ends } = props
-
-    this.state = {
-      batchNumber, starts, ends, errors: {},
-    }
 
     this.state = {
       batchNumber,

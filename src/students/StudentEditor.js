@@ -1,10 +1,10 @@
 // src/batches/StudentEditor.js
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { replace } from 'react-router-redux'
+import { replace, push } from 'react-router-redux'
 // import Editor from 'react-medium-editor'
 // import toMarkdown from 'to-markdown'
-import createBatch from '../actions/batches/create'
+import addStudent from '../actions/batches/add-student'
 import { showError } from '../actions/loading'
 import 'medium-editor/dist/css/medium-editor.css'
 import 'medium-editor/dist/css/themes/default.css'
@@ -80,19 +80,23 @@ class BatchEditor extends PureComponent {
     return Object.keys(errors).length === 0
   }
 
-  saveBatch() {
+  saveStudent() {
     const {
       fullName,
       picture,
     } = this.state
 
-    const batch = {
+    const student = {
       fullName,
       picture,
     }
 
-    if (this.validate(batch)) {
-      this.props.createBatch(batch)
+    if (this.validate(student)) {
+      console.log(student)
+      const { batchId } = this.props.params
+      this.props.addStudent(batchId, student)
+      debugger
+      this.props.push(`/batches/${batchId}`)
     }
   }
 
@@ -132,7 +136,7 @@ class BatchEditor extends PureComponent {
         })} */}
 
         <div className="actions">
-          <button className="primary" onClick={this.saveBatch.bind(this)}>Save</button>
+          <button className="primary" onClick={this.saveStudent.bind(this)}>Save</button>
         </div>
       </div>
     )
@@ -142,4 +146,4 @@ class BatchEditor extends PureComponent {
 const mapStateToProps = ({ currentUser }) => ({
   signedIn: !!currentUser && !!currentUser._id,
 })
-export default connect(mapStateToProps, { createBatch, replace, showError })(BatchEditor)
+export default connect(mapStateToProps, { addStudent, replace, showError })(BatchEditor)
