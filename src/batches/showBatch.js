@@ -42,7 +42,7 @@ export class ShowBatch extends PureComponent {
           <h3>{student.fullName}</h3>
         </Link>
         <img src={student.picture} alt="student-picture"/>
-        <p>Last color in array: {this.lastEvaluation(student).color}</p>
+        <p>Color: {this.lastEvaluation(student).color}</p>
       </div>
     )
   }

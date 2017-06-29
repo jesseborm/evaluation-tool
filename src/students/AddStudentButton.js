@@ -8,16 +8,36 @@ import StudentEditor from './StudentEditor'
 import './AddStudentButton.css'
 
 class AddStudentButton extends PureComponent {
+  // constructor(props) {
+  //   super()
+  //
+  //   const { batchNumber } = props
+  //
+  //   this.state = {
+  //     batchNumber
+  //   }
+  //
+  // }
+
   static propTypes = {
+    // batch: PropTypes.object,
     signedIn: PropTypes.bool,
   }
+
+  // renderLink() {
+  //   const { batchId } = this.props.params
+  //   console.log(batchId);
+  //   debugger
+  //   return `/batches/${batchId.toString()}`
+  // }
 
   render() {
     if (!this.props.signedIn) return null
 
     return (
       <div className="AddStudentButton">
-        <Link to="/batches/:batchId/add-student">
+        {/* <Link to={this.renderLink}> */}
+        <Link to='/add-student'>
           <RaisedButton
             label="Add student"
             primary={true}
