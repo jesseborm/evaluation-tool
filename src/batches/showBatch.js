@@ -11,7 +11,6 @@ import QuestionButton from '../components/QuestionButton'
 import AddStudentButton from '../students/AddStudentButton'
 import './ShowBatch.css'
 
-
 // const PLACEHOLDER = 'http://via.placeholder.com/500x180?text=No%20Image'
 
 export class ShowBatch extends PureComponent {

@@ -27,17 +27,7 @@ class QuestionButton extends PureComponent {
     this.setState({open: false});
   };
 
-  selectColor() {
-    let chance = Math.random()
 
-    if (chance <= .017) {
-      return "green"
-    } else if (chance > .5) {
-      return "red"
-    } else {
-      return "yellow"
-    }
-  }
   selectColor() {
     // debugger
     let chance = Math.random()
