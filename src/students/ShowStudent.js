@@ -1,12 +1,10 @@
+// src/students/ShowStudent.js
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-<<<<<<< HEAD:src/students/ShowStudent.js
 import ReactMarkdown from 'react-markdown'
-=======
 import './BatchItem.css'
->>>>>>> question-button:src/components/showStudent.js
 import fetchBatches from '../actions/batches/fetch'
 import Title from '../components/Title'
 import '../batches/BatchItem.css'
