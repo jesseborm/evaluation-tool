@@ -3,15 +3,15 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import RaisedButton from 'material-ui/RaisedButton'
+// import RaisedButton from 'material-ui/RaisedButton'
 
 import fetchBatches from '../actions/batches/fetch'
 import Title from '../components/Title'
-// import QuestionButton from '../components/QuestionButton'
+import QuestionButton from '../components/QuestionButton'
 import './ShowBatch.css'
 
 
-const PLACEHOLDER = 'http://via.placeholder.com/500x180?text=No%20Image'
+// const PLACEHOLDER = 'http://via.placeholder.com/500x180?text=No%20Image'
 
 export class ShowBatch extends PureComponent {
   static propTypes = {
@@ -40,7 +40,7 @@ export class ShowBatch extends PureComponent {
         <Link to={`/batches/${this.props._id}/students/${student._id}`}>
           <h3>{student.fullName}</h3>
         </Link>
-        <img src={student.picture} />
+        <img src={student.picture} alt="student-picture"/>
         <p>Last color in array: {this.lastEvaluation(student).color}</p>
       </div>
     )

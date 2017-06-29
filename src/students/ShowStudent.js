@@ -1,15 +1,11 @@
+// src/students/ShowStudent.js
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Link } from 'react-router'
-<<<<<<< HEAD:src/students/ShowStudent.js
-import ReactMarkdown from 'react-markdown'
-=======
-import './BatchItem.css'
->>>>>>> question-button:src/components/showStudent.js
+// import { Link } from 'react-router'
 import fetchBatches from '../actions/batches/fetch'
 import Title from '../components/Title'
-import '../batches/BatchItem.css'
+import '../batches/ShowBatch.css'
 
 export class ShowStudent extends PureComponent {
   static propTypes = {
@@ -36,7 +32,7 @@ export class ShowStudent extends PureComponent {
     return (
       <div key={index} className="studentnumber">
         <h3>{student.fullName}</h3>
-        <img src={student.picture} />
+        <img src={student.picture} alt=''/>
       </div>
     )
   }

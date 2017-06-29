@@ -45,11 +45,8 @@ export class BatchesContainer extends PureComponent {
             <Title content="All Batches" />
             <CreateBatchButton />
           </header>
-
           <main>
-
             { this.props.batches.map(this.renderBatch.bind(this)) }
-
           </main>
         </div>
       )
