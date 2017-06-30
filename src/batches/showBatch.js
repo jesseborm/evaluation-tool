@@ -6,6 +6,7 @@ import { Link } from 'react-router'
 // import RaisedButton from 'material-ui/RaisedButton'
 
 import fetchBatches from '../actions/batches/fetch'
+import getCurrentBatch from '../actions/batches/get'
 import Title from '../components/Title'
 import QuestionButton from '../components/QuestionButton'
 import AddStudentButton from '../students/AddStudentButton'
@@ -23,7 +24,25 @@ export class ShowBatch extends PureComponent {
   }
 
   componentWillMount() {
-    this.props.fetchBatches()
+    const { batch, fetchBatches, getCurrentBatch
+      //, subscribeToBatches, subscribed
+    } = this.props
+    const { batchId } = this.props.params
+
+    if (!batch) fetchBatches()
+    getCurrentBatch(batchId)
+    // if (!subscribed) subscribeToBatches()
+
+    // this.props.fetchBatches()
+    // const { _id } = this.props
+    // const { getBatch } = this.props
+    // this.props.getBatch(_id)
+    // debugger
+  }
+
+
+  changeDate(date) {
+    return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear()
   }
 
   renderStudentColor(student) {
@@ -60,11 +79,10 @@ export class ShowBatch extends PureComponent {
       return student
     })
 
-    const total = green.length + red.length + yellow.length
-    const greenPercentage = (green.length / total) * 100
-    const yellowPercentage = (yellow.length / total) * 100
-    const redPercentage = (red.length / total) * 100
-
+      const total = green.length + red.length + yellow.length
+      const greenPercentage = (green.length / total) * 100
+      const yellowPercentage = (yellow.length / total) * 100
+      const redPercentage = (red.length / total) * 100
   }
 
 
@@ -94,7 +112,7 @@ export class ShowBatch extends PureComponent {
             // label="Who is the lucky one?"
             // onClick={ this.askQuestionTo(students).bind(this) }
           />
-          <AddStudentButton />
+          <AddStudentButton batchId={_id} />
         </div>
         <div className="cover">{students.map(this.renderStudents.bind(this))}</div>
         <main>
@@ -105,17 +123,21 @@ export class ShowBatch extends PureComponent {
   }
 }
 
-const mapStateToProps = ({ batches }, { params }) => {
+const mapStateToProps = ({ batches, currentBatch }, { params }) => {
   const batch = batches.reduce((prev, next) => {
     if (next._id === params.batchId) {
       return next
     }
     return prev
   }, {})
+  // const batch = batches.filter((b) => (b._id === currentBatch))[0]
+  //   return {
+  //     batch,
 
   return {
-    ...batch
+    ...batch,
+
   }
 }
 
-export default connect(mapStateToProps, { fetchBatches })(ShowBatch)
+export default connect(mapStateToProps, { fetchBatches, getCurrentBatch })(ShowBatch)

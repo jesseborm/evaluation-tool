@@ -86,7 +86,9 @@ class QuestionButton extends PureComponent {
 
     return (
       <div>
-        <RaisedButton label="Ask away" onTouchTap={this.handleOpen} />
+        <RaisedButton
+          label="Who is the lucky one?"
+          onTouchTap={this.handleOpen} />
         <Dialog
           title="Ask questionn dialog"
           actions={actions}
