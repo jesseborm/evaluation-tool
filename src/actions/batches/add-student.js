@@ -29,7 +29,7 @@ export default (batchId, newStudent) => {
           type: STUDENT_ADDED,
           payload: result
         })
-        // history.replace('/batches/:batchId')
+        history.replace('/')
         // history.replace(`/batches/:${_id}`)
 
       })

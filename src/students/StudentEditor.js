@@ -94,18 +94,18 @@ class BatchEditor extends PureComponent {
     const { currentBatch } = this.props
 
     if (this.validate(student)) {
-      debugger
+      // debugger
       console.log(student)
       const { _id } = currentBatch
-      const { batchId } = this.props
-      this.props.addStudent(batchId, student)
+      console.log(_id);
+      this.props.addStudent(_id, student)
       // this.props.push(`/batches/${batchId}`)
     }
   }
 
   render() {
     const { errors } = this.state
-    const { currentBatch } = this.state
+    // const { currentBatch } = this.props
 
     return (
       <div className="editor">

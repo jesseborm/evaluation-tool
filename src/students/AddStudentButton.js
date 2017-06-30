@@ -11,32 +11,32 @@ import './AddStudentButton.css'
 
 class AddStudentButton extends PureComponent {
   static propTypes = {
-    _id: PropTypes.string,
+    // _id: PropTypes.string,
     signedIn: PropTypes.bool,
   }
 
-  renderLink() {
-    debugger
-    const { _id } = this.props
-    console.log(_id);
-    debugger
-    return `/batches/${_id}/add-student`
-  }
+  // renderLink() {
+  //   debugger
+  //   const { _id } = this.props
+  //   console.log(_id);
+  //   debugger
+  //   return `/batches/${_id}/add-student`
+  // }
 
 
 
   render() {
     if (!this.props.signedIn) return null
 
-    const { _id } = this.props
-    console.log(_id);
+    // const { _id } = this.props
+    // console.log(_id);
     return (
       <div className="AddStudentButton">
-        <Link to={this.renderLink}>
-          {/* <Link to={`/batches/${_id}/add-student`}> */}
+        {/* <Link to={this.renderLink}> */}
+        <Link to={`/add-student`}>
           <RaisedButton
-              label="Add student"
-              primary={true}
+            label="Add student"
+            primary={true}
           />
         </Link>
       </div>
