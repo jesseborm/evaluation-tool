@@ -12,8 +12,6 @@ import QuestionButton from '../components/QuestionButton'
 import AddStudentButton from '../students/AddStudentButton'
 import './ShowBatch.css'
 
-// const PLACEHOLDER = 'http://via.placeholder.com/500x180?text=No%20Image'
-
 export class ShowBatch extends PureComponent {
   static propTypes = {
     _id: PropTypes.string,
@@ -78,11 +76,21 @@ export class ShowBatch extends PureComponent {
       if (this.lastEvaluation(student).color === "yellow")
       return student
     })
-
       const total = green.length + red.length + yellow.length
-      const greenPercentage = (green.length / total) * 100
-      const yellowPercentage = (yellow.length / total) * 100
-      const redPercentage = (red.length / total) * 100
+      const greenPercentage = (green.length / total * 100).toFixed(2)
+      const yellowPercentage = (yellow.length / total * 100).toFixed(2)
+      const redPercentage = (red.length / total * 100).toFixed(2)
+
+    return (
+      <div className="batchColors">
+        Colors of this batch:
+        <ul>
+          <li className="green">Green: {greenPercentage}%</li>
+          <li className="yellow">Yellow: {yellowPercentage}%</li>
+          <li className="red">Red: {redPercentage}%</li>
+        </ul>
+      </div>
+    )
   }
 
 
@@ -100,22 +108,19 @@ export class ShowBatch extends PureComponent {
     return(
       <article className="batch-student">
         <header>
-
-          {/* <div
-            className="cover"
-          style={{ backgroundImage: `url(${batches.student.picture})` }} /> */}
           <Title content={`Batch number: ${batchNumber} `} />
         </header>
-        {/* <div className="color-bar">{this.showColorPercentage(students).bind(this)}</div> */}
+        {/* {this.showColorPercentage(students) */}
         <div>
+          {this.showColorPercentage(students)}
           <QuestionButton students={students}
             // label="Who is the lucky one?"
             // onClick={ this.askQuestionTo(students).bind(this) }
           />
           <AddStudentButton batchId={_id} />
         </div>
-        <div className="cover">{students.map(this.renderStudents.bind(this))}</div>
         <main>
+          <div className="cover">{students.map(this.renderStudents.bind(this))}</div>
         </main>
       </article>
 

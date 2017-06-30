@@ -12,14 +12,25 @@ article.batch-student
   background-color: #c9d7e4
   padding: 2.2em
 
+
   @include breakpoint($breakpoint-medium)
     margin: .8em
     min-width: calc(45% - 4.4rem)
     flex-shrink: 1
 
+
+
   main, footer
     padding: 10px 0
     min-width: calc(100% - 1.6rem)
+    ul
+      li.green
+        text-decoration-color: green
+      li.yellow
+        color: yellow
+      li.red
+        color: red
+
 
   img
     max-width: 300px
