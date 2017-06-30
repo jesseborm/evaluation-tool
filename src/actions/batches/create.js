@@ -1,5 +1,6 @@
 // src/actions/batches/create.js
 
+import { history } from '../../store'
 import API from '../../api'
 import {
   APP_LOADING,
@@ -15,11 +16,13 @@ export default (newBatch) => {
     dispatch({ type: APP_LOADING })
 
     const backend = api.service('batches')
-    debugger
+    // debugger
     backend.create(newBatch)
       .then((result) => {
         dispatch({ type: APP_DONE_LOADING })
         dispatch({ type: LOAD_SUCCESS })
+        
+        history.replace('/')
       })
       .catch((error) => {
         dispatch({ type: APP_DONE_LOADING })
