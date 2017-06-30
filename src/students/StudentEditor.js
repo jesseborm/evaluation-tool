@@ -86,19 +86,19 @@ class BatchEditor extends PureComponent {
       picture,
     } = this.state
 
+
     const student = {
       fullName,
       picture,
     }
-
     const { currentBatch } = this.props
 
     if (this.validate(student)) {
+      debugger
       console.log(student)
       const { _id } = currentBatch
-      // const { batchId } = this.props
-      // debugger
-      this.props.addStudent(currentBatch._id, student)
+      const { batchId } = this.props
+      this.props.addStudent(batchId, student)
       // this.props.push(`/batches/${batchId}`)
     }
   }
@@ -147,7 +147,7 @@ class BatchEditor extends PureComponent {
 }
 
 const mapStateToProps = ({ currentUser, currentBatch }) => ({
+  currentBatch,
   signedIn: !!currentUser && !!currentUser._id,
-  currentBatch
 })
 export default connect(mapStateToProps, { addStudent, replace, showError })(BatchEditor)
