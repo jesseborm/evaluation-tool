@@ -105,9 +105,11 @@ class BatchEditor extends PureComponent {
 
   render() {
     const { errors } = this.state
+    const { currentBatch } = this.state
 
     return (
       <div className="editor">
+        {/* <p>{currentBatch._id}</p> */}
         <input
           type="text"
           ref="fullName"
@@ -147,7 +149,7 @@ class BatchEditor extends PureComponent {
 }
 
 const mapStateToProps = ({ currentUser, currentBatch }) => ({
-  currentBatch,
   signedIn: !!currentUser && !!currentUser._id,
+  currentBatch,
 })
 export default connect(mapStateToProps, { addStudent, replace, showError })(BatchEditor)

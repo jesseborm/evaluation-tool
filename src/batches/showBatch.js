@@ -112,7 +112,7 @@ export class ShowBatch extends PureComponent {
             // label="Who is the lucky one?"
             // onClick={ this.askQuestionTo(students).bind(this) }
           />
-          <AddStudentButton />
+          <AddStudentButton batchId={_id} />
         </div>
         <div className="cover">{students.map(this.renderStudents.bind(this))}</div>
         <main>
