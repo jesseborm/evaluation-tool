@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import PropTypes from 'prop-types'
 import RaisedButton from 'material-ui/RaisedButton'
@@ -8,9 +9,9 @@ import Dialog from 'material-ui/Dialog'
 import './QuestionButton.css'
 
 class QuestionButton extends PureComponent {
-  // static propTypes = {
-  //   students: PropTypes.array.isRequired
-  // }
+  static propTypes = {
+    students: PropTypes.array.isRequired
+  }
   // static propTypes = {
   //   open: PropTypes.bool,
   // }
@@ -41,6 +42,9 @@ class QuestionButton extends PureComponent {
     }
   }
 
+  lastEvaluation(student) {
+    return student.evaluation[student.evaluation.length - 1]
+  }
 
   // checkColorValid() {
   //   // check if there is a student with the selected color who hasn't been asked yet today
@@ -48,7 +52,9 @@ class QuestionButton extends PureComponent {
   //   if (color)
   // }
 
-  askQuestionTo(students) {
+  askQuestionTo() {
+    const { students } = this.props
+    debugger
     const luckyOnes = students.filter((stud) => {
       if (this.lastEvaluation(stud).color === this.selectColor()) {
         return stud
@@ -60,15 +66,16 @@ class QuestionButton extends PureComponent {
 
     const luckyOne = (luckyOnes[Math.floor(Math.random() * luckyOnes.length)]).fullName
     // const theName = luckyOne.fullName
-    // debugger
+    debugger
     // console.log(theName);
     // window.alert(luckyOne.fullName)
-    // return luckOne
+    return luckyOne
   }
 
 
 
   render() {
+    const { students } = this.props
     // link to go to studentpage
     const actions = [
       <Link to="/">
@@ -88,7 +95,9 @@ class QuestionButton extends PureComponent {
       <div>
         <RaisedButton
           label="Who is the lucky one?"
-          onTouchTap={this.handleOpen} />
+          // onClick={this.askQuestionTo}
+          onTouchTap={this.handleOpen}
+        />
         <Dialog
           title="Ask questionn dialog"
           actions={actions}
@@ -97,6 +106,7 @@ class QuestionButton extends PureComponent {
           onRequestClose={this.handleClose}
         >
           This is the lucky name:
+          {this.askQuestionTo}
         </Dialog>
         {/* <RaisedButton
           className="QuestionButton"
@@ -109,4 +119,8 @@ class QuestionButton extends PureComponent {
   }
 }
 
-export default QuestionButton
+const mapStateToProps = ({ currentBatch }) => ({
+  batch: currentBatch,
+})
+
+export default connect(mapStateToProps)(QuestionButton)

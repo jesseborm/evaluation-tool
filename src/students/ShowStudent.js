@@ -69,7 +69,7 @@ debugger
         <header>
           <Title content={`Student: ${student.fullName} `} />
         </header>
-        <div>Batchnumberrr: {batchNumber}</div>
+        <div>Batchnumber: {batchNumber}</div>
         {/* <div>{students.map((s) => s.fullName)}</div> */}
         {/* <div>
           {students.map(
