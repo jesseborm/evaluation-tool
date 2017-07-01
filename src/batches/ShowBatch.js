@@ -121,7 +121,7 @@ export class ShowBatch extends PureComponent {
     if (!_id) return null
 
     return(
-      <article className="batch-student">
+      <div className="students wrapper">
         <header>
           <Title content={`Batch number: ${batchNumber} `} />
         </header>
@@ -137,7 +137,7 @@ export class ShowBatch extends PureComponent {
         <main>
           <div className="cover">{students.map(this.renderStudents.bind(this))}</div>
         </main>
-      </article>
+      </div>
 
     )
   }

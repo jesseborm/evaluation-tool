@@ -67,6 +67,10 @@ class QuestionButton extends PureComponent {
     return window.alert("And the lucky one is " + luckyOne)
   }
 
+  renderAnswer() {
+    //render answer on question here and show in dialog box
+  }
+
 
 
   render() {

@@ -16,6 +16,7 @@ export class BatchItem extends PureComponent {
     students: PropTypes.Array
   }
 
+
   render() {
     const {
       _id,
