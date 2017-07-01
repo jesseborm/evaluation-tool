@@ -1,5 +1,6 @@
 // src/reducers/batchs.js
 import { FETCHED_BATCHES } from '../actions/batches/fetch'
+import { STUDENT_ADDED } from '../actions/batches/add-student'
 import {
   BATCH_CREATED,
   BATCH_UPDATED,
@@ -22,6 +23,10 @@ export default (state = [], { type, payload } = {}) => {
         }
         return batch
       })
+
+    case STUDENT_ADDED :
+      const newStudent = { ...payload }
+      return [newStudent].concat(state)
 
     case BATCH_REMOVED :
         return state.filter((batch) => (batch._id !== payload._id))

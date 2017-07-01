@@ -48,6 +48,8 @@ export class ShowBatch extends PureComponent {
   }
 
   lastEvaluation(student) {
+    // if (student.evaluation.length === 0) return null
+    // if (student.evaluation.length == [])
     return student.evaluation[student.evaluation.length - 1]
   }
 
@@ -58,12 +60,13 @@ export class ShowBatch extends PureComponent {
           <h3>{student.fullName}</h3>
         </Link>
         <img src={student.picture} alt="student-picture"/>
-        <p>Color: {this.lastEvaluation(student).color}</p>
+        {/* <p>Color: {this.lastEvaluation(student).color}</p> */}
       </div>
     )
   }
 
   showColorPercentage(students) {
+
     let green = students.filter((student) => {
       if (this.lastEvaluation(student).color === "green")
       return student

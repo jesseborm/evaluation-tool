@@ -9,7 +9,7 @@ import {
   LOAD_SUCCESS
 } from '../loading'
 
-const STUDENT_ADDED = 'STUDENT_ADDED'
+export const STUDENT_ADDED = 'STUDENT_ADDED'
 
 const api = new API()
 
@@ -29,6 +29,7 @@ export default (batchId, newStudent) => {
           type: STUDENT_ADDED,
           payload: result
         })
+        console.log(result);
         history.replace('/')
         // history.replace(`/batches/:${_id}`)
 

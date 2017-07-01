@@ -53,20 +53,15 @@ class QuestionButton extends PureComponent {
   // }
 
   askQuestionTo() {
+    if (!this.props.students) return null
     const { students } = this.props
-    debugger
     const luckyOnes = students.filter((stud) => {
       if (this.lastEvaluation(stud).color === this.selectColor()) {
         return stud
       }
     })
-    // if (luckyOnes == '')
-    // if (luckyOnes === [])
-      // askQuestionTo(students)
-
     const luckyOne = (luckyOnes[Math.floor(Math.random() * luckyOnes.length)]).fullName
     // const theName = luckyOne.fullName
-    debugger
     // console.log(theName);
     // window.alert(luckyOne.fullName)
     return luckyOne
