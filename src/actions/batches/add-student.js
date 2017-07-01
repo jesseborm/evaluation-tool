@@ -13,13 +13,13 @@ export const STUDENT_ADDED = 'STUDENT_ADDED'
 
 const api = new API()
 
-export default (batchId, studentId) => {
+export default (batchId, newStudent) => {
   return (dispatch) => {
     dispatch({ type: APP_LOADING })
 
     const backend = api.service('batches')
 
-    backend.patch(batchId, studentId)
+    backend.patch(batchId, newStudent)
 
       .then((result) => {
         dispatch({ type: APP_DONE_LOADING })

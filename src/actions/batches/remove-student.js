@@ -11,13 +11,13 @@ export const STUDENT_REMOVED = 'STUDENT_REMOVED'
 
 const api = new API()
 
-export default (batchId, newStudent) => {
+export default (batchId, student) => {
   return (dispatch) => {
     dispatch({ type: APP_LOADING })
 
     const backend = api.service('batches')
 
-    backend.remove(batchId, newStudent)
+    backend.remove(batchId, { student, remove: true })
 
       .then((result) => {
         dispatch({ type: APP_DONE_LOADING })

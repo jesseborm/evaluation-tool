@@ -24,7 +24,11 @@ export class ShowBatch extends PureComponent {
 
   componentWillMount() {
     const { batch, fetchBatches, getCurrentBatch  } = this.props
+    // console.log("1" + batch);
+    // console.log("2" + this.props);
     const { batchId } = this.props.params
+    // const { _id } = batch
+    // console.log("3" + _id);
     // debugger
     if (!batch) fetchBatches()
     getCurrentBatch(batchId)
@@ -54,7 +58,9 @@ export class ShowBatch extends PureComponent {
   renderStudents(student, index) {
     // if (student.color === "grey") return
     const { batchId } = this.props.params
-    console.log("Hello::: " + student[0]);
+    // console.log("Hello::: " + currentBatch._id);
+    const { studentId } = this.props.params
+    // console.log("bla " + studentId);
     return (
       <div key={index} className="studentnumber">
         <Link to={`/batches/${this.props._id}/students/${student._id}`}>
@@ -64,7 +70,7 @@ export class ShowBatch extends PureComponent {
         <p>Color: {this.lastEvaluation(student).color}</p>
         <FlatButton className="delete"
           label="Delete student"
-          onClick={() => {this.props.removeStudent(batchId, student._id)}}
+          onClick={() => {this.removeStudent(batchId, studentId)}}
           primary={true}
         />
       </div>
@@ -150,8 +156,9 @@ const mapStateToProps = ({ batches, currentBatch }, { params }) => {
 
   return {
     ...batch,
+    currentBatch,
 
   }
 }
 
-export default connect(mapStateToProps, { fetchBatches, getCurrentBatch })(ShowBatch)
+export default connect(mapStateToProps, { removeStudent, fetchBatches, getCurrentBatch })(ShowBatch)
