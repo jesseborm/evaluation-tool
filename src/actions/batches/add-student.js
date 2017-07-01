@@ -13,13 +13,13 @@ export const STUDENT_ADDED = 'STUDENT_ADDED'
 
 const api = new API()
 
-export default (batchId, newStudent) => {
+export default (batchId, studentId) => {
   return (dispatch) => {
     dispatch({ type: APP_LOADING })
 
     const backend = api.service('batches')
 
-    backend.patch(batchId, newStudent)
+    backend.patch(batchId, studentId)
 
       .then((result) => {
         dispatch({ type: APP_DONE_LOADING })
@@ -30,8 +30,9 @@ export default (batchId, newStudent) => {
           payload: result
         })
         console.log(result);
-        history.replace('/')
-        // history.replace(`/batches/:${_id}`)
+        // history.replace('/')
+        api.app.set('batches', batchId)
+        history.replace(`/batches/:${batchId}`)
 
       })
       .catch((error) => {

@@ -7,7 +7,7 @@ import {
   LOAD_SUCCESS
 } from '../loading'
 
-export const STUDENT_ADDED = 'STUDENT_ADDED'
+export const STUDENT_REMOVED = 'STUDENT_REMOVED'
 
 const api = new API()
 
@@ -17,14 +17,14 @@ export default (batchId, newStudent) => {
 
     const backend = api.service('batches')
 
-    backend.patch(batchId, newStudent)
+    backend.remove(batchId, newStudent)
 
       .then((result) => {
         dispatch({ type: APP_DONE_LOADING })
         dispatch({ type: LOAD_SUCCESS })
 
         dispatch({
-          type: STUDENT_ADDED,
+          type: STUDENT_REMOVED,
           payload: result
         })
         console.log(result);

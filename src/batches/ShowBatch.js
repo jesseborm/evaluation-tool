@@ -3,33 +3,31 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-// import RaisedButton from 'material-ui/RaisedButton'
+import FlatButton from 'material-ui/FlatButton'
 
 import fetchBatches from '../actions/batches/fetch'
 import getCurrentBatch from '../actions/batches/get'
 import Title from '../components/Title'
 import QuestionButton from '../components/QuestionButton'
 import AddStudentButton from '../students/AddStudentButton'
+import removeStudent from '../actions/batches/remove-student'
 import './ShowBatch.css'
 
 export class ShowBatch extends PureComponent {
   static propTypes = {
     _id: PropTypes.string,
     batchNumber: PropTypes.string,
-    starts: PropTypes.instanceOf(Date),
-    ends: PropTypes.instanceOf(Date),
+    // starts: PropTypes.instanceOf(Date),
+    // ends: PropTypes.instanceOf(Date),
     students: PropTypes.Array
   }
 
   componentWillMount() {
-    const { batch, fetchBatches, getCurrentBatch
-      //, subscribeToBatches, subscribed
-    } = this.props
+    const { batch, fetchBatches, getCurrentBatch  } = this.props
     const { batchId } = this.props.params
-
+    // debugger
     if (!batch) fetchBatches()
     getCurrentBatch(batchId)
-    // if (!subscribed) subscribeToBatches()
 
     // this.props.fetchBatches()
     // const { _id } = this.props
@@ -54,13 +52,21 @@ export class ShowBatch extends PureComponent {
   }
 
   renderStudents(student, index) {
+    // if (student.color === "grey") return
+    const { batchId } = this.props.params
+    console.log("Hello::: " + student[0]);
     return (
       <div key={index} className="studentnumber">
         <Link to={`/batches/${this.props._id}/students/${student._id}`}>
           <h3>{student.fullName}</h3>
         </Link>
         <img src={student.picture} alt="student-picture"/>
-        {/* <p>Color: {this.lastEvaluation(student).color}</p> */}
+        <p>Color: {this.lastEvaluation(student).color}</p>
+        <FlatButton className="delete"
+          label="Delete student"
+          onClick={() => {this.props.removeStudent(batchId, student._id)}}
+          primary={true}
+        />
       </div>
     )
   }
