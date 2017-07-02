@@ -3,33 +3,35 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-// import RaisedButton from 'material-ui/RaisedButton'
+import FlatButton from 'material-ui/FlatButton'
 
 import fetchBatches from '../actions/batches/fetch'
 import getCurrentBatch from '../actions/batches/get'
 import Title from '../components/Title'
 import QuestionButton from '../components/QuestionButton'
 import AddStudentButton from '../students/AddStudentButton'
+import removeStudent from '../actions/batches/remove-student'
 import './ShowBatch.css'
 
 export class ShowBatch extends PureComponent {
   static propTypes = {
     _id: PropTypes.string,
     batchNumber: PropTypes.string,
-    starts: PropTypes.instanceOf(Date),
-    ends: PropTypes.instanceOf(Date),
+    // starts: PropTypes.instanceOf(Date),
+    // ends: PropTypes.instanceOf(Date),
     students: PropTypes.Array
   }
 
   componentWillMount() {
-    const { batch, fetchBatches, getCurrentBatch
-      //, subscribeToBatches, subscribed
-    } = this.props
+    const { batch, fetchBatches, getCurrentBatch  } = this.props
+    // console.log("1" + batch);
+    // console.log("2" + this.props);
     const { batchId } = this.props.params
-
+    // const { _id } = batch
+    // console.log("3" + _id);
+    // debugger
     if (!batch) fetchBatches()
     getCurrentBatch(batchId)
-    // if (!subscribed) subscribeToBatches()
 
     // this.props.fetchBatches()
     // const { _id } = this.props
@@ -48,10 +50,18 @@ export class ShowBatch extends PureComponent {
   }
 
   lastEvaluation(student) {
+    // if (student.evaluation.length === 0) return null
+    // if (student.evaluation.length == [])
     return student.evaluation[student.evaluation.length - 1]
   }
 
   renderStudents(student, index) {
+    // if (student.color === "grey") return
+    const { batchId } = this.props.params
+    // console.log("Hello::: " + currentBatch._id);
+    const { studentId } = this.props.params
+    console.log("bla " + studentId);
+    // debugger
     return (
       <div key={index} className="studentnumber">
         <Link to={`/batches/${this.props._id}/students/${student._id}`}>
@@ -59,11 +69,21 @@ export class ShowBatch extends PureComponent {
         </Link>
         <img src={student.picture} alt="student-picture"/>
         <p>Color: {this.lastEvaluation(student).color}</p>
+        <FlatButton className="delete"
+          label="Delete student"
+          onClick={this.deleteStudent(batchId, student._id)}
+          primary={true}
+        />
       </div>
     )
   }
 
+  deleteStudent = (batchId, studentId) => {
+    removeStudent(batchId, studentId)
+  }
+
   showColorPercentage(students) {
+
     let green = students.filter((student) => {
       if (this.lastEvaluation(student).color === "green")
       return student
@@ -106,7 +126,7 @@ export class ShowBatch extends PureComponent {
     if (!_id) return null
 
     return(
-      <article className="batch-student">
+      <div className="students wrapper">
         <header>
           <Title content={`Batch number: ${batchNumber} `} />
         </header>
@@ -120,9 +140,15 @@ export class ShowBatch extends PureComponent {
           <AddStudentButton batchId={_id} />
         </div>
         <main>
-          <div className="cover">{students.map(this.renderStudents.bind(this))}</div>
+          <div className="cover">
+            {students.map(
+              this.renderStudents.bind(this)
+
+            )
+            }
+          </div>
         </main>
-      </article>
+      </div>
 
     )
   }
@@ -141,8 +167,9 @@ const mapStateToProps = ({ batches, currentBatch }, { params }) => {
 
   return {
     ...batch,
+    currentBatch,
 
   }
 }
 
-export default connect(mapStateToProps, { fetchBatches, getCurrentBatch })(ShowBatch)
+export default connect(mapStateToProps, { removeStudent, fetchBatches, getCurrentBatch })(ShowBatch)

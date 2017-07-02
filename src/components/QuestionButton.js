@@ -54,22 +54,21 @@ class QuestionButton extends PureComponent {
 
   askQuestionTo() {
     const { students } = this.props
-    debugger
+    // if (!this.props.students) return null
     const luckyOnes = students.filter((stud) => {
       if (this.lastEvaluation(stud).color === this.selectColor()) {
         return stud
       }
     })
-    // if (luckyOnes == '')
-    // if (luckyOnes === [])
-      // askQuestionTo(students)
-
     const luckyOne = (luckyOnes[Math.floor(Math.random() * luckyOnes.length)]).fullName
     // const theName = luckyOne.fullName
-    debugger
     // console.log(theName);
     // window.alert(luckyOne.fullName)
-    return luckyOne
+    return window.alert("And the lucky one is " + luckyOne)
+  }
+
+  renderAnswer() {
+    //render answer on question here and show in dialog box
   }
 
 
@@ -95,8 +94,8 @@ class QuestionButton extends PureComponent {
       <div>
         <RaisedButton
           label="Who is the lucky one?"
-          // onClick={this.askQuestionTo}
-          onTouchTap={this.handleOpen}
+          onClick={() => {this.askQuestionTo(students)}}
+          // onTouchTap={this.handleOpen}
         />
         <Dialog
           title="Ask questionn dialog"
@@ -106,7 +105,7 @@ class QuestionButton extends PureComponent {
           onRequestClose={this.handleClose}
         >
           This is the lucky name:
-          {this.askQuestionTo}
+          {/* {this.askQuestionTo} */}
         </Dialog>
         {/* <RaisedButton
           className="QuestionButton"
