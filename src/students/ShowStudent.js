@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 // import { Link } from 'react-router'
 import fetchBatches from '../actions/batches/fetch'
+import EvaluationEditor from './EvaluationEditor'
 import Title from '../components/Title'
 import '../batches/ShowBatch.css'
 
@@ -65,7 +66,7 @@ export class ShowStudent extends PureComponent {
     return(
       <article className="Batch page">
         <header>
-          <Title content={`Student} `} />
+          <Title content={student.fullName} />
         </header>
         {/* <div>{students.map((s) => s.fullName)}</div> */}
         {/* <div>
@@ -76,11 +77,11 @@ export class ShowStudent extends PureComponent {
         </div> */}
         <main>
           <div>Batchnumber: {currentBatch._id}</div>
-          <div>{`student.evaluation[-1].color`}</div>
-          <div>{`student.picture`}</div>
+          <div>{student.evaluation[student.evaluation.length - 1].color}</div>
+          <img src={student.picture} alt="student-picture"/>
           <div>{evaluation.map(this.renderEvaluations.bind(this))}</div>
-
         </main>
+        <EvaluationEditor params={this.props.params} />
       </article>
     )
   }
