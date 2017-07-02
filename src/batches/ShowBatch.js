@@ -60,7 +60,8 @@ export class ShowBatch extends PureComponent {
     const { batchId } = this.props.params
     // console.log("Hello::: " + currentBatch._id);
     const { studentId } = this.props.params
-    // console.log("bla " + studentId);
+    console.log("bla " + studentId);
+    // debugger
     return (
       <div key={index} className="studentnumber">
         <Link to={`/batches/${this.props._id}/students/${student._id}`}>
@@ -70,11 +71,15 @@ export class ShowBatch extends PureComponent {
         <p>Color: {this.lastEvaluation(student).color}</p>
         <FlatButton className="delete"
           label="Delete student"
-          onClick={() => {this.removeStudent(batchId, studentId)}}
+          onClick={this.deleteStudent(batchId, student._id)}
           primary={true}
         />
       </div>
     )
+  }
+
+  deleteStudent = (batchId, studentId) => {
+    removeStudent(batchId, studentId)
   }
 
   showColorPercentage(students) {
@@ -135,7 +140,13 @@ export class ShowBatch extends PureComponent {
           <AddStudentButton batchId={_id} />
         </div>
         <main>
-          <div className="cover">{students.map(this.renderStudents.bind(this))}</div>
+          <div className="cover">
+            {students.map(
+              this.renderStudents.bind(this)
+
+            )
+            }
+          </div>
         </main>
       </div>
 

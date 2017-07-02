@@ -32,7 +32,7 @@ export default (batchId, newStudent) => {
         console.log(result);
         // history.replace('/')
         api.app.set('batches', batchId)
-        history.replace(`/batches/:${batchId}`)
+        history.replace(`/batches/${batchId}`)
 
       })
       .catch((error) => {

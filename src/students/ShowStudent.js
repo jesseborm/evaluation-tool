@@ -16,9 +16,10 @@ export class ShowStudent extends PureComponent {
   }
 
   componentWillMount() {
-    const { batch, student } = this.props
-    const { studentId } = this.props.params
+    // const { batch, student } = this.props
+    const { batchId, studentId } = this.props.params
     this.props.fetchBatches()
+    // debugger
   }
 
 
@@ -37,39 +38,35 @@ export class ShowStudent extends PureComponent {
     )
   }
 
-  renderEvaluation(evaluation, index) {
+  renderEvaluations(evaluation, index) {
+
     return (
       <div key={index} className="studentevaluation">
-        {/* {evaluations[0].} */}
-        <h3>{evaluation[0].color}</h3>
-
+        <div>{evaluation.date}</div>
+        <div>{evaluation.color}</div>
+        <div>{evaluation.remark}</div>
       </div>
     )
   }
 
   render() {
-    const {batch} = this.props
+    // debugger
+    const { currentBatch } = this.props
     const {studentId, batchId } = this.props.params
-    if(!!!batch) return null
-    const student = batch.students.find(stud => stud._id.toString() === studentId.toString())
+    if(!!!currentBatch) return null
+    const student = currentBatch.students.find(stud => stud._id.toString() === studentId.toString())
     const {
-    //
-    //   // _id,
-      batchNumber,
-    //   student,
-    //   // evaluation,
-    //   // fullName,
-    //   // params,
-    } = this.props
+      _id,
+      fullName,
+      picture,
+      evaluation,
+  } = student
 
-    // const { studentId } = this.props.params
-debugger
     return(
       <article className="Batch page">
         <header>
-          <Title content={`Student: ${student.fullName} `} />
+          <Title content={`Student} `} />
         </header>
-        <div>Batchnumber: {batchNumber}</div>
         {/* <div>{students.map((s) => s.fullName)}</div> */}
         {/* <div>
           {students.map(
@@ -77,12 +74,19 @@ debugger
             .renderStudents
             .bind(this))}
         </div> */}
+        <main>
+          <div>Batchnumber: {currentBatch._id}</div>
+          <div>{`student.evaluation[-1].color`}</div>
+          <div>{`student.picture`}</div>
+          <div>{evaluation.map(this.renderEvaluations.bind(this))}</div>
+
+        </main>
       </article>
     )
   }
 }
 
-const mapStateToProps = ({ batches }, { params }) => {
+const mapStateToProps = ({ batches, currentBatch }, { params }) => {
 
     const batch = batches.reduce((prev, next) => {
       if (next._id === params.batchId) {
@@ -91,7 +95,8 @@ const mapStateToProps = ({ batches }, { params }) => {
       return prev
     }, {})
     return {
-      ...batch
+      ...batch,
+      currentBatch,
     }
 
     // const student = batch.students
