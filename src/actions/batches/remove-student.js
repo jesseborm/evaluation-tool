@@ -17,7 +17,7 @@ export default (batchId, student) => {
 
     const backend = api.service('batches')
 
-    backend.remove(batchId, { student, remove: true })
+    backend.patch(batchId, { student, remove: true })
 
       .then((result) => {
         dispatch({ type: APP_DONE_LOADING })

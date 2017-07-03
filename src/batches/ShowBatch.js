@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import FlatButton from 'material-ui/FlatButton'
+import RaisedButton from 'material-ui/RaisedButton'
 
 import fetchBatches from '../actions/batches/fetch'
 import getCurrentBatch from '../actions/batches/get'
@@ -24,6 +25,7 @@ export class ShowBatch extends PureComponent {
 
   componentWillMount() {
     const { batch, fetchBatches, getCurrentBatch  } = this.props
+    // const { students } = batch
     // console.log("1" + batch);
     // console.log("2" + this.props);
     const { batchId } = this.props.params
@@ -32,12 +34,57 @@ export class ShowBatch extends PureComponent {
     // debugger
     if (!batch) fetchBatches()
     getCurrentBatch(batchId)
+  }
 
-    // this.props.fetchBatches()
-    // const { _id } = this.props
-    // const { getBatch } = this.props
-    // this.props.getBatch(_id)
-    // debugger
+  state = {
+    open: false,
+  };
+
+  handleOpen = () => {
+    this.setState({open: true});
+  };
+
+  handleClose = () => {
+    this.setState({open: false});
+  };
+
+  selectColor() {
+    let chance = Math.random()
+
+    if (chance <= .17) {
+      return "green"
+    } else if (chance > .5) {
+      return "red"
+    } else {
+      return "yellow"
+    }
+  }
+
+  lastEvaluation(student) {
+    return student.evaluation[student.evaluation.length - 1]
+  }
+
+  // checkColorValid() {
+  //   // check if there is a student with the selected color who hasn't been asked yet today
+  //   let color = this.selectColor()
+  //   if (color)
+  // }
+
+  askQuestionTo() {
+    debugger
+    const { students } = this.props
+    // if (!this.props.students) return null
+    let luckyOnes = students.filter((stud) => {
+      if (this.lastEvaluation(stud).color === this.selectColor()) {
+        return stud
+      }
+    })
+    if (luckyOnes.length === 0) return this.askQuestionTo()
+    let luckyOne = (luckyOnes[Math.floor(Math.random() * luckyOnes.length)]).fullName
+    // const theName = luckyOne.fullName
+    // console.log(theName);
+    // window.alert(luckyOne.fullName)
+    return window.alert("And the lucky one is " + luckyOne)
   }
 
 
@@ -114,6 +161,7 @@ export class ShowBatch extends PureComponent {
   }
 
 
+
   render() {
     const {
       _id,
@@ -122,6 +170,23 @@ export class ShowBatch extends PureComponent {
       ends,
       students,
     } = this.props
+
+    const { batchId } = this.props.params
+
+
+    const actions = [
+      <Link to={`/batches/${batchId}`} >
+        <FlatButton
+          label="Go to student page"
+          primary={true} />
+      </Link>,
+      <FlatButton
+        label="next "
+        primary={true}
+        keyboardFocused={true}
+        onTouchTap={this.handleClose}
+      />,
+    ]
 
     if (!_id) return null
 
@@ -133,10 +198,25 @@ export class ShowBatch extends PureComponent {
         {/* {this.showColorPercentage(students) */}
         <div>
           {this.showColorPercentage(students)}
-          <QuestionButton students={students}
-            // label="Who is the lucky one?"
-            // onClick={ this.askQuestionTo(students).bind(this) }
-          />
+          {/* <RaisedButton
+            label="Who is the lucky one?"
+          onClick={this.askQuestionTo}  /> */}
+          <QuestionButton  students={students}/>
+          {/* <RaisedButton
+            label="Who is the lucky one?"
+            onClick={this.handleOpen}
+            // onTouchTap={this.handleOpen}
+            />
+            <Dialog
+            title="Ask questionn dialog"
+            actions={actions}
+            modal={false}
+            open={this.state.open}
+            onRequestClose={this.handleClose}
+            >
+            This is the lucky name:
+            {this.askQuestionTo}
+          </Dialog> */}
           <AddStudentButton batchId={_id} />
         </div>
         <main>

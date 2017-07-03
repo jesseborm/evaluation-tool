@@ -19,28 +19,38 @@ export default (batchId, newStudent) => {
 
     const backend = api.service('batches')
 
-    backend.patch(batchId, newStudent)
+    // api.app.authenticate()
+    //   .then(() => {
+        backend.patch(batchId, newStudent)
 
-      .then((result) => {
-        dispatch({ type: APP_DONE_LOADING })
-        dispatch({ type: LOAD_SUCCESS })
+          .then((result) => {
+            dispatch({ type: APP_DONE_LOADING })
+            dispatch({ type: LOAD_SUCCESS })
 
-        dispatch({
-          type: STUDENT_ADDED,
-          payload: result
-        })
-        console.log(result);
-        // history.replace('/')
-        api.app.set('batches', batchId)
-        history.replace(`/batches/${batchId}`)
+            dispatch({
+              type: STUDENT_ADDED,
+              payload: result
+            })
+            console.log(result);
+            // history.replace('/')
+            api.app.set('batches', batchId)
+            history.replace(`/batches/${batchId}`)
 
-      })
-      .catch((error) => {
-        dispatch({ type: APP_DONE_LOADING })
-        dispatch({
-          type: LOAD_ERROR,
-          payload: error.message
-        })
-      })
+          })
+          .catch((error) => {
+            dispatch({ type: APP_DONE_LOADING })
+            dispatch({
+              type: LOAD_ERROR,
+              payload: error.message
+            })
+          })
+        // })
+        // .catch((error) => {
+        //   dispatch({ type: APP_DONE_LOADING })
+        //   dispatch({
+        //     type: LOAD_ERROR,
+        //     payload: error.message
+        //   })
+        // })
   }
 }

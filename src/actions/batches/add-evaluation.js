@@ -20,17 +20,17 @@ export default (batchId, studentId, evaluation) => {
     const backend = api.service('batches')
 
     // debugger
-    api.app.authenticate()
-      .then(() => {
+    // api.app.authenticate()
+    //   .then(() => {
         // debugger
         backend.patch(batchId, { studentId, evaluation })
           .then((result) => {
             dispatch({ type: APP_DONE_LOADING })
             dispatch({ type: LOAD_SUCCESS })
             dispatch({ type: EVALUATION_ADDED, payload: result })
-            
+
             console.log("Helloooooo::: " + result);
-            debugger
+            // debugger
             // history.replace('/')
             api.app.set('batches', batchId)
             history.replace(`/batches/${batchId}`)
@@ -43,13 +43,13 @@ export default (batchId, studentId, evaluation) => {
               payload: error.message
             })
           })
-      })
-      .catch((error) => {
-        dispatch({ type: APP_DONE_LOADING })
-        dispatch({
-          type: LOAD_ERROR,
-          payload: error.message
-        })
-      })
+      // })
+      // .catch((error) => {
+      //   dispatch({ type: APP_DONE_LOADING })
+      //   dispatch({
+      //     type: LOAD_ERROR,
+      //     payload: error.message
+      //   })
+      // })
   }
 }

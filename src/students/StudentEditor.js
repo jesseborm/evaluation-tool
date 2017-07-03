@@ -16,7 +16,7 @@ import '../batches/BatchEditor.css'
 //   'red'
 // ]
 
-class BatchEditor extends PureComponent {
+class StudentEditor extends PureComponent {
   constructor(props) {
     super()
 
@@ -45,7 +45,6 @@ class BatchEditor extends PureComponent {
   // }
 
   updateFullName(event) {
-    // this.makeFullName(f, l)
     this.setState({
       fullName: this.refs.fullName.value
     })
@@ -152,4 +151,4 @@ const mapStateToProps = ({ currentUser, currentBatch }) => ({
   signedIn: !!currentUser && !!currentUser._id,
   currentBatch,
 })
-export default connect(mapStateToProps, { addStudent, replace, showError })(BatchEditor)
+export default connect(mapStateToProps, { addStudent, replace, showError })(StudentEditor)
