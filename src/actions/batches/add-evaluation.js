@@ -9,29 +9,28 @@ import {
   LOAD_SUCCESS
 } from '../loading'
 
-export const STUDENT_ADDED = 'STUDENT_ADDED'
+export const EVALUATION_ADDED = 'EVALUATION_ADDED'
 
 const api = new API()
 
-export default (batchId, newStudent) => {
+export default (batchId, studentId, evaluation) => {
   return (dispatch) => {
     dispatch({ type: APP_LOADING })
 
     const backend = api.service('batches')
 
+    // debugger
     // api.app.authenticate()
     //   .then(() => {
-        backend.patch(batchId, newStudent)
-
+        // debugger
+        backend.patch(batchId, { studentId, evaluation })
           .then((result) => {
             dispatch({ type: APP_DONE_LOADING })
             dispatch({ type: LOAD_SUCCESS })
+            dispatch({ type: EVALUATION_ADDED, payload: result })
 
-            dispatch({
-              type: STUDENT_ADDED,
-              payload: result
-            })
-            console.log(result);
+            console.log("Helloooooo::: " + result);
+            // debugger
             // history.replace('/')
             api.app.set('batches', batchId)
             history.replace(`/batches/${batchId}`)
@@ -44,13 +43,13 @@ export default (batchId, newStudent) => {
               payload: error.message
             })
           })
-        // })
-        // .catch((error) => {
-        //   dispatch({ type: APP_DONE_LOADING })
-        //   dispatch({
-        //     type: LOAD_ERROR,
-        //     payload: error.message
-        //   })
-        // })
+      // })
+      // .catch((error) => {
+      //   dispatch({ type: APP_DONE_LOADING })
+      //   dispatch({
+      //     type: LOAD_ERROR,
+      //     payload: error.message
+      //   })
+      // })
   }
 }

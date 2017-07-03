@@ -9,13 +9,17 @@ import Dialog from 'material-ui/Dialog'
 import './QuestionButton.css'
 
 class QuestionButton extends PureComponent {
-  static propTypes = {
-    students: PropTypes.array.isRequired
-  }
-  // static propTypes = {
-  //   open: PropTypes.bool,
+  // constructor(props) {
+  //   super()
+  //   const { students } = props
+  //
   // }
 
+  // componentWillMount() {
+  //   const { students } = this.props
+  // }
+
+debugger
   state = {
     open: false,
   };
@@ -42,6 +46,37 @@ class QuestionButton extends PureComponent {
     }
   }
 
+  today() {
+    let currentDate = new Date()
+    var day = currentDate.getDate()
+    var month = currentDate.getMonth() + 1
+    var year = currentDate.getFullYear()
+    return day + "/" + month + "/" + year
+  }
+
+  getPrettyDateFromDate() {
+
+  }
+
+  // lastEvaluationDate(student) {
+  //   student.evaluation.filter((e) => {
+  //     if (e.date.toLocaleDateString() === new Date().toLocaleDateString())
+  //   })
+  //   return student.evaluation[student.evaluation.length - 1]
+  // }
+
+  // checkDateToday(lastEval) {
+  //   if (lastEval.date.toLocaleDateString() !== new Date().toLocaleDateString()) {
+  //     return lastEval
+  //   }
+  // }
+
+  // lastEvaluation(student) {
+  //   if (!!!student.evaluation[student.evaluation.length - 1]) return null
+  //   // check if date of today is lastEvaluations date, skip
+  //   return this.checkDateToday(student.evaluation[student.evaluation.length - 1])
+  //   // return student.evaluation[student.evaluation.length - 1]
+  // }
   lastEvaluation(student) {
     return student.evaluation[student.evaluation.length - 1]
   }
@@ -52,15 +87,19 @@ class QuestionButton extends PureComponent {
   //   if (color)
   // }
 
-  askQuestionTo() {
-    const { students } = this.props
+  askQuestionTo(students) {
+    // debugger
+    // const { students } = this.props
     // if (!this.props.students) return null
-    const luckyOnes = students.filter((stud) => {
+
+
+    let luckyOnes = students.filter((stud) => {
       if (this.lastEvaluation(stud).color === this.selectColor()) {
         return stud
       }
     })
-    const luckyOne = (luckyOnes[Math.floor(Math.random() * luckyOnes.length)]).fullName
+    if (luckyOnes.length === 0) return this.askQuestionTo()
+    let luckyOne = (luckyOnes[Math.floor(Math.random() * luckyOnes.length)]).fullName
     // const theName = luckyOne.fullName
     // console.log(theName);
     // window.alert(luckyOne.fullName)
@@ -74,8 +113,9 @@ class QuestionButton extends PureComponent {
 
 
   render() {
+    // debugger
     const { students } = this.props
-    // link to go to studentpage
+
     const actions = [
       <Link to="/">
         <FlatButton
